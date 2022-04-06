@@ -1,6 +1,4 @@
-# AdminLTE + VueJS 2
-
-> AdminLTE + VueJS 2
+Admin zoneprofi
 
 ## Build Setup
 
