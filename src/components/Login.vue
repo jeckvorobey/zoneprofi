@@ -54,16 +54,16 @@
     },
     methods: {
       login: function () {
-        var store = this.$store
+        const store = this.$store
 
-        var credentials = {
+        const credentials = {
           username: this.credentials.username,
           password: this.credentials.password
         }
 
         this.$http.get('/static/auth.json', credentials)
           .then(function (data) {
-            var token = data.body.token
+            const token = data.body.token
             store.commit('SET_TOKEN', token)
 
             // Save to local storage as well
