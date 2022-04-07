@@ -15,11 +15,11 @@ Vue.use(VueRouter)
 import App from './App.vue'
 
 // Routing logic
-var router = new VueRouter({
+const router = new VueRouter({
   routes: routes,
   mode: 'history',
   scrollBehavior: function (to, from, savedPosition) {
-    return savedPosition || { x: 0, y: 0 }
+    return savedPosition || {x: 0, y: 0}
   }
 })
 

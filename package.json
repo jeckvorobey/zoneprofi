@@ -1,8 +1,8 @@
 {
-  "name": "vue-admin",
+  "name": "zoneprofi-admin",
   "version": "1.0.0",
   "description": "Vue 2 + AdminLTE",
-  "author": "Seto Kuslaksono <kuslaksono@gmail.com>",
+  "author": "Sergey Vorobev <jeckvorobey69@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
