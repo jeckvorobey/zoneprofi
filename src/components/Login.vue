@@ -25,18 +25,19 @@
           <div class="col-xs-8">
             <div class="checkbox icheck">
             <label>
-            <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0; padding: 0; border: 0; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0; padding: 0; border: 0; opacity: 0; background: rgb(255, 255, 255);"></ins></div> Запомнить меня
+            <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false"><input type="checkbox"></div> Запомнить меня
             </label>
             </div>
           </div>
           <!-- /.col -->
           <div class="col-xs-4">
-            <button type="submit" class="btn btn-primary btn-block btn-flat">Вход</button>
+            <button type="submit" class="btn btn-primary btn-block btn-flat" :disabled="isDisabled">Вход</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
     </div>
+<!--    style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0; padding: 0; border: 0; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0; padd ing: 0; border: 0; opacity: 0; background: rgb(255, 255, 255);"></ins>-->
   </div>
 </template>
 
@@ -49,7 +50,8 @@
           username: '',
           password: ''
         },
-        error: ''
+        error: '',
+        disabledBtn: true
       }
     },
     methods: {
@@ -61,7 +63,7 @@
           password: this.credentials.password
         }
 
-        this.$http.get('/static/auth.json', credentials)
+        this.$http.get('/', credentials)
           .then(function (data) {
             const token = data.body.token
             store.commit('SET_TOKEN', token)
@@ -77,6 +79,11 @@
             this.error = data.body.message
           }
         )
+      }
+    },
+    computed: {
+      isDisabled () {
+        return !(this.credentials.username !== '' && this.credentials.password !== '')
       }
     },
     mounted: function () {
