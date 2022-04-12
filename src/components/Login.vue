@@ -25,8 +25,7 @@
           <div class="col-xs-8">
             <div class="checkbox icheck">
             <label>
-            <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false"><input type="checkbox"></div> Запомнить меня
-            </label>
+            <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false"><input type="checkbox"></div> Запомнить ме       </label>
             </div>
           </div>
           <!-- /.col -->
@@ -37,63 +36,39 @@
         </div>
       </form>
     </div>
-<!--    style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0; padding: 0; border: 0; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0; padd ing: 0; border: 0; opacity: 0; background: rgb(255, 255, 255);"></ins>-->
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'Login',
-    data: function () {
-      return {
-        credentials: {
-          username: '',
-          password: ''
-        },
-        error: '',
-        disabledBtn: true
-      }
-    },
-    methods: {
-      login: function () {
-        const store = this.$store
-
-        const credentials = {
-          username: this.credentials.username,
-          password: this.credentials.password
-        }
-
-        this.$http.get('/', credentials)
-          .then(function (data) {
-            const token = data.body.token
-            store.commit('SET_TOKEN', token)
-
-            // Save to local storage as well
-            if (window.localStorage) {
-              window.localStorage.setItem('token', token)
-            }
-
-            this.$router.push('/dashboard')
-          },
-          function (data) {
-            this.error = data.body.message
-          }
-        )
-      }
-    },
-    computed: {
-      isDisabled () {
-        return !(this.credentials.username !== '' && this.credentials.password !== '')
-      }
-    },
-    mounted: function () {
-      require('icheck')
-
-      $('input').iCheck({
-        checkboxClass: 'icheckbox_square-blue',
-        radioClass: 'iradio_square-blue',
-        increaseArea: '20%' // optional
-      })
+export default {
+  name: 'Login',
+  data: function () {
+    return {
+      credentials: {
+        username: '',
+        password: ''
+      },
+      error: ''
     }
+  },
+  methods: {
+    login: function () {
+      console.log(this.credentials)
+    }
+  },
+  computed: {
+    isDisabled () {
+      return !(this.credentials.username !== '' && this.credentials.password !== '')
+    }
+  },
+  mounted: function () {
+    require('icheck')
+
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    })
   }
+}
 </script>
