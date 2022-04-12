@@ -1,13 +1,8 @@
 import Vue from 'vue'
-import Resource from 'vue-resource'
 import VueRouter from 'vue-router'
 
 import routes from './routes'
 import store from './store'
-
-// Resource logic
-Vue.use(Resource)
-Vue.http.options.emulateJSON = true
 
 Vue.use(VueRouter)
 
@@ -47,8 +42,8 @@ router.beforeEach((to, from, next) => {
 // eslint-disable-next-line no-new
 new Vue({
   el: '#app',
-  router: router,
-  store: store,
+  router,
+  store,
   render: h => h(App)
 })
 
