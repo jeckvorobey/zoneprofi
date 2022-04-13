@@ -1,6 +1,6 @@
-/** @var { AuthState } */
+/** @var { UserState } */
 const STATE = {
-  token: null
+  user: null
 }
 
 export default STATE

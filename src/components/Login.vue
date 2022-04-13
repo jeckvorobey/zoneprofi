@@ -14,25 +14,30 @@
         </div>
 
         <div class="form-group has-feedback">
-          <input type="text" class="form-control" placeholder="Логин" v-model="credentials.login">
+          <input type="text" class="form-control" placeholder="Логин" v-model="form.credentials.login">
           <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
-          <input type="password" class="form-control" placeholder="Пароль" v-model="credentials.pas">
+          <input type="password" class="form-control" placeholder="Пароль" v-model="form.credentials.pas">
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
         <div class="row">
           <div class="col-xs-8">
             <div class="checkbox icheck">
             <label>
-              <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false"><input type="checkbox"></div>
+              <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false">
+                <input
+                  type="checkbox"
+                  v-model="form.checked"
+                >
+              </div>
               Запомнить меня
             </label>
             </div>
           </div>
           <!-- /.col -->
           <div class="col-xs-4">
-            <button type="submit" class="btn btn-primary btn-block btn-flat" :disabled="isDisabled">Вход</button>
+            <button type="submit" class="btn btn-primary btn-block  n-flat" :disabled="isDisabled">Вход</button>
           </div>
           <!-- /.col -->
         </div>
@@ -48,18 +53,22 @@ export default {
   name: 'Login',
   data: function () {
     return {
-      credentials: {
-        login: '',
-        pas: ''
+      form: {
+        checked: false,
+        credentials: {
+          login: '',
+          pas: ''
+        }
       },
       error: ''
     }
   },
   methods: {
-    ...mapActions(['auth/auth']),
-    userAuth: function () {
-      if (this.credentials.password !== '' && this.credentials.username !== '') {
-        this.$store.dispatch('auth/auth', this.credentials)
+    ...mapActions('user', ['AUTH_USER']),
+    userAuth () {
+      if (this.form.credentials.pas !== '' && this.form.credentials.login !== '') {
+        // this.AUTH_USER(this.form)
+        console.log('remember ' + this.form.checked)
       } else {
         this.error = 'Поля должны быть заполнены'
       }
@@ -67,7 +76,7 @@ export default {
   },
   computed: {
     isDisabled () {
-      return !(this.credentials.username !== '' && this.credentials.password !== '')
+      return !(this.form.credentials.login !== '' && this.form.credentials.pas !== '')
     }
   },
   mounted: function () {

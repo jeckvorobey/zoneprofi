@@ -2,13 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import routes from './routes'
-import store from './store'
+import store from './store/index'
 
 Vue.use(VueRouter)
 
 // Import top level component
 import App from './App.vue'
-import {SET_TOKEN} from './store/auth/mutation-types'
 
 // Routing logic
 const router = new VueRouter({
@@ -21,17 +20,19 @@ const router = new VueRouter({
 
 // Check local storage to handle refreshes
 if (window.localStorage) {
-  if (store.getters['auth/getToken'] !== window.localStorage.getItem('token')) {
-    console.log(window.localStorage.getItem('token'))
-    store.commit(SET_TOKEN, window.localStorage.getItem('token'))
+  if (window.localStorage.getItem('avtkey')) {
+    console.log(window.localStorage.getItem('avtkey'))
+    store.dispatch('user/AUTH_KEY_USER', window.localStorage.getItem('avtkey'))
+      .then(() => router.push('/dashboard'))
+      .catch(e => console.log(e))
   }
 }
 
 // Some middleware to help us ensure the user is authenticated.
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth) && (store.getters['auth/getToken'] === null)) {
+  if (to.matched.some(record => record.meta.requiresAuth) && (store.getters['user/GET_USER'] === null)) {
     next('/login')
-  } else if ((store.getters['auth/getToken'] !== null) && to.path === '/login') {
+  } else if ((store.getters['user/GET_USER'] !== null) && to.path === '/login') {
     next('/dashboard')
   } else {
     next()
