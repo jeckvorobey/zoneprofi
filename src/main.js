@@ -21,7 +21,6 @@ const router = new VueRouter({
 // Check local storage to handle refreshes
 if (window.localStorage) {
   if (window.localStorage.getItem('avtkey')) {
-    console.log(window.localStorage.getItem('avtkey'))
     store.dispatch('user/AUTH_KEY_USER', window.localStorage.getItem('avtkey'))
       .then(() => router.push('/dashboard'))
       .catch(e => console.log(e))
@@ -32,7 +31,7 @@ if (window.localStorage) {
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth) && (store.getters['user/GET_USER'] === null)) {
     next('/login')
-  } else if ((store.getters['user/GET_USER'] !== null) && to.path === '/login') {
+  } else if ((store.getters['user/GET_USER'] !== null && to.path === '/login')) {
     next('/dashboard')
   } else {
     next()

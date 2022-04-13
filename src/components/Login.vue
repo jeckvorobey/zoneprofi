@@ -64,9 +64,10 @@ export default {
   },
   methods: {
     ...mapActions('user', ['AUTH_USER']),
-    userAuth () {
+    async userAuth () {
       if (this.form.credentials.pas !== '' && this.form.credentials.login !== '') {
-        this.AUTH_USER(this.form)
+        await this.AUTH_USER(this.form)
+        this.$router.push('/dashboard')
       } else {
         this.error = 'Поля должны быть заполнены'
       }
