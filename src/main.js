@@ -1,13 +1,8 @@
 import Vue from 'vue'
-import Resource from 'vue-resource'
 import VueRouter from 'vue-router'
 
 import routes from './routes'
-import store from './store'
-
-// Resource logic
-Vue.use(Resource)
-Vue.http.options.emulateJSON = true
+import store from './store/index'
 
 Vue.use(VueRouter)
 
@@ -15,26 +10,28 @@ Vue.use(VueRouter)
 import App from './App.vue'
 
 // Routing logic
-var router = new VueRouter({
+const router = new VueRouter({
   routes: routes,
   mode: 'history',
   scrollBehavior: function (to, from, savedPosition) {
-    return savedPosition || { x: 0, y: 0 }
+    return savedPosition || {x: 0, y: 0}
   }
 })
 
 // Check local storage to handle refreshes
 if (window.localStorage) {
-  if (store.state.token !== window.localStorage.getItem('token')) {
-    store.commit('SET_TOKEN', window.localStorage.getItem('token'))
+  if (window.localStorage.getItem('avtkey')) {
+    store.dispatch('user/AUTH_KEY_USER', window.localStorage.getItem('avtkey'))
+      .then(() => router.push('/dashboard'))
+      .catch(e => console.log(e))
   }
 }
 
 // Some middleware to help us ensure the user is authenticated.
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth) && (store.state.token === null)) {
+  if (to.matched.some(record => record.meta.requiresAuth) && (store.getters['user/GET_USER'] === null)) {
     next('/login')
-  } else if ((store.state.token !== null) && to.path === '/login') {
+  } else if ((store.getters['user/GET_USER'] !== null && to.path === '/login')) {
     next('/dashboard')
   } else {
     next()
@@ -45,8 +42,8 @@ router.beforeEach((to, from, next) => {
 // eslint-disable-next-line no-new
 new Vue({
   el: '#app',
-  router: router,
-  store: store,
+  router,
+  store,
   render: h => h(App)
 })
 

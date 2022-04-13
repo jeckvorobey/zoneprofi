@@ -1,8 +1,8 @@
 {
-  "name": "vue-admin",
+  "name": "zoneprofi-admin",
   "version": "1.0.0",
   "description": "Vue 2 + AdminLTE",
-  "author": "Seto Kuslaksono <kuslaksono@gmail.com>",
+  "author": "Sergey Vorobev <jeckvorobey69@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -14,13 +14,13 @@
   },
   "dependencies": {
     "admin-lte": "^2.3.8",
+    "axios": "^0.26.1",
     "bootstrap": "^3.3.7",
     "bootstrap-slider": "^9.5.3",
     "icheck": "^1.0.2",
     "ion-rangeslider": "^2.1.4",
     "jquery": "^3.1.1",
     "vue": "^2.0.1",
-    "vue-resource": "^1.0.3",
     "vue-router": "^2.0.2",
     "vuex": "^2.0.0"
   },

@@ -265,18 +265,21 @@
 </template>
 
 <script>
-  export default {
-    name: 'DashboardHeader',
-    methods: {
-      logout: function () {
-        this.$store.commit('REMOVE_TOKEN')
+import { mapActions, mapGetters } from 'vuex'
 
-        if (window.localStorage) {
-          window.localStorage.removeItem('token')
-        }
+export default {
+  name: 'DashboardHeader',
+  methods: {
+    ...mapGetters('user', ['GET_USER']),
+    ...mapActions('user', ['LOGOUT']),
+    logout: function () {
+      this.LOGOUT()
 
-        this.$router.push('/login')
+      if (window.localStorage) {
+        window.localStorage.removeItem('avtkey')
       }
+      this.$router.push('/login')
     }
   }
+}
 </script>
