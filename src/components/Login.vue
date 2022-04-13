@@ -23,12 +23,11 @@
         </div>
         <div class="row">
           <div class="col-xs-8">
-            <div class="checkbox icheck">
+            <div class="checkbox icheck" >
             <label>
               <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false">
                 <input
                   type="checkbox"
-                  v-model="form.checked"
                 >
               </div>
               Запомнить меня
@@ -67,8 +66,7 @@ export default {
     ...mapActions('user', ['AUTH_USER']),
     userAuth () {
       if (this.form.credentials.pas !== '' && this.form.credentials.login !== '') {
-        // this.AUTH_USER(this.form)
-        console.log('remember ' + this.form.checked)
+        this.AUTH_USER(this.form)
       } else {
         this.error = 'Поля должны быть заполнены'
       }
@@ -87,6 +85,9 @@ export default {
       radioClass: 'iradio_square-blue',
       increaseArea: '20%' // optional
     })
+      .on('ifChecked ifUnchecked', () => {
+        this.form.checked = !this.form.checked
+      })
   }
 }
 </script>

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { SET_USER } from './mutation-types'
+import routes from '../../routes'
 
 /**
  * @param { function } commit
@@ -16,10 +17,10 @@ export function AUTH_USER ({ commit }, authData) {
         // console.log(r.data.res)
         if (r.data.res.hasOwnProperty('avtkey')) {
           commit(SET_USER, r.data.res)
-          if (authData.remember) {
+          if (authData.checked) {
             window.localStorage.setItem('avtkey', r.data.res.avtkey)
           }
-          console.log('auth success')
+          routes.push('/dashboard')
         } else {
           console.log('Not auth messages: ' + r.data.res)
         }
