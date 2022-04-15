@@ -28,12 +28,12 @@ const routes = [
       document.body.className += ' skin-blue sidebar-mini'
       next()
     },
-    activate: function () {
-      this.$nextTick(function () {
-        // => 'DOM loaded and ready'
-        alert('test')
-      })
-    },
+    // activate: function () {
+    //   this.$nextTick(function () {
+    //     // => 'DOM loaded and ready'
+    //     alert('test')
+    //   })
+    // },
     children: [
       {
         path: '',
