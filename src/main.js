@@ -23,6 +23,7 @@ if (window.localStorage && !store.getters['user/GET_USER']) {
   if (window.localStorage.getItem('avtkey')) {
     store.dispatch('user/AUTH_KEY_USER', window.localStorage.getItem('avtkey'))
       .then(() => {
+        // Some middleware to help us ensure the user is authenticated.
         router.beforeEach((to, from, next) => {
           if (to.matched.some(record => record.meta.requiresAuth) && (store.getters['user/GET_USER'] === null)) {
             next('/login')
@@ -37,17 +38,6 @@ if (window.localStorage && !store.getters['user/GET_USER']) {
       .catch(e => console.log(e))
   }
 }
-
-// Some middleware to help us ensure the user is authenticated.
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(record => record.meta.requiresAuth) && (store.getters['user/GET_USER'] === null)) {
-//     next('/login')
-//   } else if ((store.getters['user/GET_USER'] !== null && to.path === '/login')) {
-//     next('/dashboard')
-//   } else {
-//     next()
-//   }
-// })
 
 // Start out app!
 // eslint-disable-next-line no-new

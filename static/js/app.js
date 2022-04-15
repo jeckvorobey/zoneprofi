@@ -52,7 +52,7 @@ $.AdminLTE.options = {
   //Enable sidebar expand on hover effect for sidebar mini
   //This option is forced to true if both the fixed layout and sidebar mini
   //are used together
-  sidebarExpandOnHover: false,
+  sidebarExpandOnHover: true,
   //BoxRefresh Plugin
   enableBoxRefresh: true,
   //Bootstrap.js tooltip
@@ -151,7 +151,7 @@ $(function () {
   }
 
   //Easy access to options
-  var o = $.AdminLTE.options;
+  const o = $.AdminLTE.options;
 
   //Set up the object
   _init();
@@ -201,7 +201,7 @@ $(function () {
   //Activate direct chat widget
   if (o.directChat.enable) {
     $(document).on('click', o.directChat.contactToggleSelector, function () {
-      var box = $(this).parents('.direct-chat').first();
+      const box = $(this).parents('.direct-chat').first();
       box.toggleClass('direct-chat-contacts-open');
     });
   }
@@ -211,7 +211,7 @@ $(function () {
    * ------------------------
    */
   $('.btn-group[data-toggle="btn-toggle"]').each(function () {
-    var group = $(this);
+    const group = $(this);
     $(this).find(".btn").on('click', function (e) {
       group.find(".btn.active").removeClass("active");
       $(this).addClass("active");
@@ -239,7 +239,7 @@ function _init() {
    */
   $.AdminLTE.layout = {
     activate: function () {
-      var _this = this;
+      const _this = this;
       _this.fix();
       _this.fixSidebar();
       $('body, html, .wrapper').css('height', 'auto');
@@ -252,15 +252,15 @@ function _init() {
       // Remove overflow from .wrapper if layout-boxed exists
       $(".layout-boxed > .wrapper").css('overflow', 'hidden');
       //Get window height and the wrapper height
-      var neg = $('.main-header').outerHeight() + $('.main-footer').outerHeight();
-      var window_height = $(window).height();
-      var sidebar_height = $(".sidebar").height();
+      const neg = $('.main-header').outerHeight() + $('.main-footer').outerHeight();
+      const window_height = $(window).height();
+      const sidebar_height = $(".sidebar").height();
       //Set the min-height of the content and sidebar based on the
       //the height of the document.
       if ($("body").hasClass("fixed")) {
         $(".content-wrapper, .right-side").css('min-height', window_height - $('.main-footer').outerHeight());
       } else {
-        var postSetWidth;
+        let postSetWidth;
         if (window_height >= sidebar_height) {
           $(".content-wrapper, .right-side").css('min-height', window_height - neg);
           postSetWidth = window_height - neg;
@@ -270,7 +270,7 @@ function _init() {
         }
 
         //Fix for the control sidebar height
-        var controlSidebar = $($.AdminLTE.options.controlSidebarOptions.selector);
+        const controlSidebar = $($.AdminLTE.options.controlSidebarOptions.selector);
         if (typeof controlSidebar !== "undefined") {
           if (controlSidebar.height() > postSetWidth)
             $(".content-wrapper, .right-side").css('min-height', controlSidebar.height());
@@ -314,7 +314,7 @@ function _init() {
   $.AdminLTE.pushMenu = {
     activate: function (toggleBtn) {
       //Get the screen sizes
-      var screenSizes = $.AdminLTE.options.screenSizes;
+      const screenSizes = $.AdminLTE.options.screenSizes;
 
       //Enable sidebar toggle
       $(document).on('click', toggleBtn, function (e) {
@@ -353,8 +353,8 @@ function _init() {
       }
     },
     expandOnHover: function () {
-      var _this = this;
-      var screenWidth = $.AdminLTE.options.screenSizes.sm - 1;
+      const _this = this;
+      const screenWidth = $.AdminLTE.options.screenSizes.sm - 1;
       //Expand sidebar on hover
       $('.main-sidebar').hover(function () {
         if ($('body').hasClass('sidebar-mini')
@@ -389,13 +389,13 @@ function _init() {
    * @Usage: $.AdminLTE.tree('.sidebar')
    */
   $.AdminLTE.tree = function (menu) {
-    var _this = this;
-    var animationSpeed = $.AdminLTE.options.animationSpeed;
+    const _this = this;
+    const animationSpeed = $.AdminLTE.options.animationSpeed;
     $(document).off('click', menu + ' li a')
       .on('click', menu + ' li a', function (e) {
         //Get the clicked link and the next element
-        var $this = $(this);
-        var checkElement = $this.next();
+        const $this = $(this);
+        const checkElement = $this.next();
 
         //Check if the next element is a menu and is visible
         if ((checkElement.is('.treeview-menu')) && (checkElement.is(':visible')) && (!$('body').hasClass('sidebar-collapse'))) {
@@ -410,13 +410,13 @@ function _init() {
         //If the menu is not visible
         else if ((checkElement.is('.treeview-menu')) && (!checkElement.is(':visible'))) {
           //Get the parent menu
-          var parent = $this.parents('ul').first();
+          const parent = $this.parents('ul').first();
           //Close all open menus within the parent
-          var ul = parent.find('ul:visible').slideUp(animationSpeed);
+          const ul = parent.find('ul:visible').slideUp(animationSpeed);
           //Remove the menu-open class from the parent
           ul.removeClass('menu-open');
           //Get the parent li
-          var parent_li = $this.parent("li");
+          const parent_li = $this.parent("li");
 
           //Open the target menu and add the menu-open class
           checkElement.slideDown(animationSpeed, function () {
@@ -446,13 +446,13 @@ function _init() {
     //instantiate the object
     activate: function () {
       //Get the object
-      var _this = this;
+      const _this = this;
       //Update options
-      var o = $.AdminLTE.options.controlSidebarOptions;
+      const o = $.AdminLTE.options.controlSidebarOptions;
       //Get the sidebar
-      var sidebar = $(o.selector);
+      const sidebar = $(o.selector);
       //The toggle button
-      var btn = $(o.toggleBtnSelector);
+      const btn = $(o.toggleBtnSelector);
 
       //Listen to the click event
       btn.on('click', function (e) {
@@ -468,7 +468,7 @@ function _init() {
       });
 
       //If the body has a boxed layout, fix the sidebar bg position
-      var bg = $(".control-sidebar-bg");
+      const bg = $(".control-sidebar-bg");
       _this._fix(bg);
 
       //If the body has a fixed layout, make the control sidebar fixed
@@ -501,7 +501,7 @@ function _init() {
       }
     },
     _fix: function (sidebar) {
-      var _this = this;
+      const _this = this;
       if ($("body").hasClass('layout-boxed')) {
         sidebar.css('position', 'absolute');
         sidebar.height($(".wrapper").height());
@@ -546,7 +546,7 @@ function _init() {
     icons: $.AdminLTE.options.boxWidgetOptions.boxWidgetIcons,
     animationSpeed: $.AdminLTE.options.animationSpeed,
     activate: function (_box) {
-      var _this = this;
+      const _this = this;
       if (!_box) {
         _box = document; // activate all boxes per default
       }
@@ -563,11 +563,11 @@ function _init() {
       });
     },
     collapse: function (element) {
-      var _this = this;
+      const _this = this;
       //Find the box parent
-      var box = element.parents(".box").first();
+      const box = element.parents(".box").first();
       //Find the body and the footer
-      var box_content = box.find("> .box-body, > .box-footer, > form  >.box-body, > form > .box-footer");
+      const box_content = box.find("> .box-body, > .box-footer, > form  >.box-body, > form > .box-footer");
       if (!box.hasClass("collapsed-box")) {
         //Convert minus into plus
         element.children(":first")
@@ -590,7 +590,7 @@ function _init() {
     },
     remove: function (element) {
       //Find the box parent
-      var box = element.parents(".box").first();
+      const box = element.parents(".box").first();
       box.slideUp(this.animationSpeed);
     }
   };
@@ -618,7 +618,7 @@ function _init() {
   $.fn.boxRefresh = function (options) {
 
     // Render options
-    var settings = $.extend({
+    const settings = $.extend({
       //Refresh button selector
       trigger: ".refresh-btn",
       //File source to be loaded (e.g: ajax/src.php)
@@ -634,7 +634,7 @@ function _init() {
     }, options);
 
     //The overlay
-    var overlay = $('<div class="overlay"><div class="fa fa-refresh fa-spin"></div></div>');
+    const overlay = $('<div class="overlay"><div class="fa fa-refresh fa-spin"></div></div>');
 
     return this.each(function () {
       //if a source is specified
@@ -645,9 +645,9 @@ function _init() {
         return;
       }
       //the box
-      var box = $(this);
+      const box = $(this);
       //the button
-      var rBtn = box.find(settings.trigger).first();
+      const rBtn = box.find(settings.trigger).first();
 
       //On trigger click
       rBtn.on('click', function (e) {
@@ -700,12 +700,12 @@ function _init() {
   };
 
   $.fn.toggleBox = function () {
-    var button = $($.AdminLTE.boxWidget.selectors.collapse, this);
+    const button = $($.AdminLTE.boxWidget.selectors.collapse, this);
     $.AdminLTE.boxWidget.collapse(button);
   };
 
   $.fn.removeBox = function () {
-    var button = $($.AdminLTE.boxWidget.selectors.remove, this);
+    const button = $($.AdminLTE.boxWidget.selectors.remove, this);
     $.AdminLTE.boxWidget.remove(button);
   };
 
@@ -725,7 +725,7 @@ function _init() {
 
   $.fn.todolist = function (options) {
     // Render options
-    var settings = $.extend({
+    const settings = $.extend({
       //When the user checks the input
       onCheck: function (ele) {
         return ele;
@@ -740,19 +740,19 @@ function _init() {
 
       if (typeof $.fn.iCheck != 'undefined') {
         $('input', this).on('ifChecked', function () {
-          var ele = $(this).parents("li").first();
+          const ele = $(this).parents("li").first();
           ele.toggleClass("done");
           settings.onCheck.call(ele);
         });
 
         $('input', this).on('ifUnchecked', function () {
-          var ele = $(this).parents("li").first();
+          const ele = $(this).parents("li").first();
           ele.toggleClass("done");
           settings.onUncheck.call(ele);
         });
       } else {
         $('input', this).on('change', function () {
-          var ele = $(this).parents("li").first();
+          const ele = $(this).parents("li").first();
           ele.toggleClass("done");
           if ($('input', ele).is(":checked")) {
             settings.onCheck.call(ele);
