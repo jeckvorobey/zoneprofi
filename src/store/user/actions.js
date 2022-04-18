@@ -15,10 +15,10 @@ export async function AUTH_USER ({ commit }, authData) {
         // console.log(r.data.res)
         if (r.data.res.hasOwnProperty('avtkey')) {
           commit(SET_USER, r.data.res)
-          if (authData.checked && window.localStorage) {
-            window.localStorage.setItem('avtkey', r.data.res.avtkey)
+          if (authData.checked) {
+            localStorage.setItem('avtkey', r.data.res.avtkey)
           }
-          this.$router.push('/dashboard')
+          // this.$router.push('/dashboard')
         } else {
           console.log('Not auth messages: ' + r.data.res)
         }

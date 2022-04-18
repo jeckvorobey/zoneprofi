@@ -11,5 +11,6 @@ export default {
   },
   [REMOVE_USER] (state) {
     state.user = null
+    localStorage.removeItem('avtkey')
   }
 }

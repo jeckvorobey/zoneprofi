@@ -22,8 +22,9 @@ const routes = [
     }
   }, {
     path: '/',
+    name: 'home',
     component: Dashboard,
-    meta: { requiresAuth: true },
+    meta: { auth: true },
     beforeEnter: (to, from, next) => {
       document.body.className += ' skin-blue sidebar-mini'
       next()
@@ -37,7 +38,7 @@ const routes = [
     children: [
       {
         path: '',
-        redirect: '/dashboard'
+        redirect: { name: 'dashboard' }
       }, {
         path: '/dashboard',
         name: 'dashboard',

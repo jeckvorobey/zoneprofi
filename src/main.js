@@ -19,25 +19,17 @@ const router = new VueRouter({
 })
 
 // Check local storage to handle refreshes
-if (window.localStorage) {
-  if (window.localStorage.getItem('avtkey')) {
-    store.dispatch('user/AUTH_KEY_USER', window.localStorage.getItem('avtkey'))
-      .then(() => {
-        router.resolve('/dashboard')
-      })
-      .catch(e => console.log(e))
-  }
+if (localStorage.getItem('avtkey')) {
+  store.dispatch('user/AUTH_KEY_USER', window.localStorage.getItem('avtkey'))
+    .then(() => {
+      // Some middleware to help us ensure the user is authenticated.
+      if (store.getters['user/GET_USER']) {
+        router.push({name: 'home'})
+      }
+    })
+    .catch(e => console.log(e))
 }
-// Some middleware to help us ensure the user is authenticated.
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth) && (store.getters['user/GET_USER'] === null)) {
-    next('/login')
-  } else if ((store.getters['user/GET_USER'] !== null && to.path === '/login')) {
-    next('/dashboard')
-  } else {
-    next()
-  }
-})
+
 // Start out app!
 // eslint-disable-next-line no-new
 new Vue({
