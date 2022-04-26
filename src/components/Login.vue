@@ -68,7 +68,7 @@ export default {
       if (this.form.credentials.pas !== '' && this.form.credentials.login !== '') {
         this.AUTH_USER(this.form)
            .then(() => {
-             this.$router.push({ name: 'home' })
+             this.$router.push({ name: 'dashboard' })
            }).catch(e => console.log(e))
       } else {
         this.error = 'Поля должны быть заполнены'

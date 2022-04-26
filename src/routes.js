@@ -22,7 +22,6 @@ const routes = [
     }
   }, {
     path: '/',
-    name: 'home',
     component: Dashboard,
     meta: { auth: true },
     beforeEnter: (to, from, next) => {
