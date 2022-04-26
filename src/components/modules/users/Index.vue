@@ -25,19 +25,19 @@
                   <div class="col-sm-6">
                     <div class="dataTables_length" id="example1_length">
                       <label>Show <select name="example1_length" aria-controls="example1" class="form-control input-sm">
-                      <option value="10">10</option>
-                      <option value="25">25</option>
-                      <option value="50">50</option>
-                      <option value="100">100</option>
-                    </select> entries
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                      </select> entries
                       </label>
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div id="example1_filter" class="dataTables_filter"><label>Search: <input type="search"
-                                                                                             class="form-control input-sm"
-                                                                                             placeholder=""
-                                                                                             aria-controls="example1"></label>
+                                                                                              class="form-control input-sm"
+                                                                                              placeholder=""
+                                                                                              aria-controls="example1"></label>
                     </div>
                   </div>
                 </div>
@@ -49,7 +49,7 @@
                       <tr role="row">
                         <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                           >Rendering engine
+                        >Rendering engine
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="Browser: activate to sort column ascending">Browser
@@ -140,17 +140,16 @@ export default {
 
   data: function () {
     return {
-      users: null
+      users: []
     }
   },
   methods: {
-    ...mapActions('users', ['GET_USERS_LIST']),
-    getUsersList () {
-      this.GET_USERS_LIST()
-    }
+  },
+  computed: {
+    ...mapActions('users', ['GET_USERS_LIST'])
   },
   mounted: function () {
-    this.getUsersList()
+    this.users = this.GET_USERS_LIST()
   }
 }
 </script>
