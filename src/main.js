@@ -24,11 +24,19 @@ if (localStorage.getItem('avtkey')) {
     .then(() => {
       // Some middleware to help us ensure the user is authenticated.
       if (store.getters['user/GET_USER']) {
-        router.push({name: 'home'})
+        router.push({name: 'dashboard'})
       }
     })
     .catch(e => console.log(e))
 }
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.auth) && !store.getters['user/GET_USER']) {
+    next('/login')
+  } else {
+    next()
+  }
+})
 
 // Start out app!
 // eslint-disable-next-line no-new
@@ -41,4 +49,4 @@ new Vue({
 
 require('bootstrap')
 require('admin-lte')
-require('../node_modules/admin-lte/dist/js/demo.js')
+// require('../node_modules/admin-lte/dist/js/demo.js')

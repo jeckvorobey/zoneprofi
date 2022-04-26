@@ -31,6 +31,11 @@
               <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </router-link>
           </li>
+          <li>
+            <router-link to="/users">
+              <i class="fa fa-users"></i> <span>Пользователи</span>
+            </router-link>
+          </li>
 <!--          <li class="treeview">-->
 <!--            <a href="#">-->
 <!--              <i class="fa fa-files-o"></i>-->

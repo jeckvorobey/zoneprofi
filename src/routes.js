@@ -1,6 +1,7 @@
 import Login from './components/Login.vue'
 import Dashboard from './components/Dashboard.vue'
 import DashboardIndex from './components/modules/dashboard/Index.vue'
+import UsersIndex from './components/modules/users/Index'
 import NotFound from './components/modules/dashboard/404.vue'
 import WidgetsIndex from './components/modules/widgets/Index.vue'
 import UIButtons from './components/modules/ui/Buttons.vue'
@@ -42,6 +43,10 @@ const routes = [
         path: '/dashboard',
         name: 'dashboard',
         component: DashboardIndex
+      }, {
+        path: '/users',
+        name: 'users',
+        component: UsersIndex
       }, {
         path: '/widgets',
         name: 'widgets',
