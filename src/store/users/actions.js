@@ -10,8 +10,10 @@ export async function GET_USERS_LIST ({ commit }) {
     method: 'get',
     url: 'https://api.zone.pro/key1781232884:AAEdjLso8u9maYpfRN1dR8CJPfI6QkXihao/users/getall/',
     headers: {
-      'Content-Type': 'text/html; charset=UTF-8',
-      'Akey': '2ac55a9e-c87b-5ce2-4081-7a5715984865'
+      'Content-Type': 'application/json'
+    },
+    data: {
+      'key': '0a5cf475-665b-6c56-86e2-d433fcd76d35'
     }
   })
     .then(r => {

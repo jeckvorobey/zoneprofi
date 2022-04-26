@@ -4,6 +4,6 @@
 * @param { UsersState } state
 * @return { object }
 */
-export function getUsers (state) {
+export function allUsers (state) {
   return state.users
 }

@@ -1,10 +1,11 @@
 import axios from 'axios'
 import {REMOVE_USER, SET_USER} from './mutation-types'
+
 /**
  * @param { function } commit
  * @param { Object } authData
  */
-export async function AUTH_USER ({ commit }, authData) {
+export async function AUTH_USER ({commit}, authData) {
   await axios({
     method: 'post',
     url: 'https://api.zone.pro/key1781232884:AAEdjLso8u9maYpfRN1dR8CJPfI6QkXihao/avt/avt',
@@ -31,7 +32,7 @@ export async function AUTH_USER ({ commit }, authData) {
  * @param { function } commit
  * @param { string } avtkey
  */
-export async function AUTH_KEY_USER ({ commit }, avtkey) {
+export async function AUTH_KEY_USER ({commit}, avtkey) {
   await axios({
     method: 'post',
     url: 'https://api.zone.pro/key1781232884:AAEdjLso8u9maYpfRN1dR8CJPfI6QkXihao/avt/avtkey',
@@ -49,13 +50,12 @@ export async function AUTH_KEY_USER ({ commit }, avtkey) {
       } else {
         console.log(`Code: ${r.data.code} ERROR: ${r.data.status}`)
       }
-    })
-    .catch(error => console.log(error))
+    }).catch(error => console.log(error))
 }
 
 /**
  * @param { function } commit
  */
-export function LOGOUT ({ commit }) {
+export function LOGOUT ({commit}) {
   commit(REMOVE_USER)
 }
