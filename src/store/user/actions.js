@@ -12,14 +12,13 @@ export async function AUTH_USER ({commit}, authData) {
     data: JSON.stringify(authData.credentials)
   })
     .then(r => {
+      //  console.log('Action AUTH_USER:\n' + JSON.stringify(r))
       if (r.status === 200) {
-        // console.log(r.data.res)
         if (r.data.res.hasOwnProperty('avtkey')) {
           commit(SET_USER, r.data.res)
           if (authData.checked) {
             localStorage.setItem('avtkey', r.data.res.avtkey)
           }
-          // this.$router.push('/dashboard')
         } else {
           console.log('Not auth messages: ' + r.data.res)
         }
@@ -41,8 +40,10 @@ export async function AUTH_KEY_USER ({commit}, avtkey) {
     })
   })
     .then(r => {
+      //  console.log('USER (Action AUTH_KEY_USER) >>> 0\n' + JSON.stringify(r))
       if (r.status === 200 && r.data.code === '200') {
         if (r.data.res.hasOwnProperty('avtkey')) {
+          // console.log('USER (Action AUTH_KEY_USER) >>> \n' + JSON.stringify(r.data.res))
           commit(SET_USER, r.data.res)
         } else {
           console.log('Not auth messages: ' + r.data.res)
@@ -50,7 +51,7 @@ export async function AUTH_KEY_USER ({commit}, avtkey) {
       } else {
         console.log(`Code: ${r.data.code} ERROR: ${r.data.status}`)
       }
-    }).catch(error => console.log(error))
+    }).catch(error => console.log('ERROR Action AUTH_KEY_USER: ' + error.message))
 }
 
 /**

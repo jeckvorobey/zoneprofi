@@ -126,30 +126,34 @@
           </div>
         </div>
       </div>
-      {{ users }}
+      <h1></h1>
     </section>
   </div>
   <!--  end content-wrapper -->
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapGetters, mapState} from 'vuex'
 
 export default {
   name: 'UsersIndex',
-
   data: function () {
-    return {
-      users: []
-    }
+    return {}
   },
   methods: {
+    ...mapActions('users', ['LOAD_USERS_LIST']),
+    loadUsersList () {
+      this.LOAD_USERS_LIST('0a5cf475-665b-6c56-86e2-d433fcd76d35')
+    }
   },
   computed: {
-    ...mapActions('users', ['GET_USERS_LIST'])
+    ...mapState('user', ['user']),
+    ...mapGetters('users', ['GET_USERS'])
   },
-  mounted: function () {
-    this.users = this.GET_USERS_LIST()
+  mounted () {
+    this.loadUsersList()
+    console.log('Mounted USER >>> ' + JSON.stringify(this.user))
+    console.log('Mounted USERS >>> ' + JSON.stringify(this.users))
   }
 }
 </script>

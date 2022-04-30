@@ -4,21 +4,20 @@ import {SET_USERS} from './mutation-types'
 /**
  *
  * @param { function } commit
+ * @param { string } key
  */
-export async function GET_USERS_LIST ({commit}) {
-  // ?limit=50&start=10
+export async function LOAD_USERS_LIST ({commit}, key) {
   await axios({
-    method: 'get',
-    url: 'https://api.zone.pro/key1781232884:AAEdjLso8u9maYpfRN1dR8CJPfI6QkXihao/users/getall/',
-    headers: {
-      'Accept': 'application/json',
-      'Akey': '0a5cf475-665b-6c56-86e2-d433fcd76d35'
-    },
-    data: {}
+    method: 'post',
+    url: 'https://api.zone.pro/key1781232884:AAEdjLso8u9maYpfRN1dR8CJPfI6QkXihao/users/getall',
+    data: JSON.stringify({
+      'key': key
+    })
   })
     .then(r => {
-      let d = JSON.stringify(r)
-      console.log(d)
-      commit(SET_USERS, r)
-    })
+      //  console.log('USERS (Action GET_USERS_LIST ) >>> \n' + JSON.stringify(r))
+      if (r.data.code === '200') {
+        commit(SET_USERS, r.data.res)
+      }
+    }).catch(error => console.log(error))
 }

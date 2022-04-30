@@ -1,6 +1,6 @@
-/** @var { UsersState } */
+/** @const { UsersState } */
 const STATE = {
-  users: []
+  users: null
 }
 
 export default STATE
