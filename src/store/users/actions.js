@@ -8,7 +8,7 @@ import {SET_USERS} from './mutation-types'
  */
 export async function LOAD_USERS_LIST ({commit}, key) {
   await axios({
-    method: 'post',
+    method: 'get',
     url: 'https://api.zone.pro/key1781232884:AAEdjLso8u9maYpfRN1dR8CJPfI6QkXihao/users/getall',
     data: JSON.stringify({
       'key': key

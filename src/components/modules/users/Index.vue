@@ -69,11 +69,11 @@
                       </thead>
                       <tbody>
                       <tr role="row" class="odd">
-                        <td class="sorting_1">Gecko</td>
-                        <td>Firefox 1.0</td>
-                        <td>Win 98+ / OSX.2+</td>
-                        <td>1.7</td>
-                        <td>A</td>
+                        <td
+                            class="sorting_1"
+                            v-for="item in users" :key="item">
+                          {{ item.info.name }}
+                        </td>
                       </tr>
                       </tbody>
                       <tfoot>
@@ -133,7 +133,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters, mapState} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 
 export default {
   name: 'UsersIndex',
@@ -143,17 +143,15 @@ export default {
   methods: {
     ...mapActions('users', ['LOAD_USERS_LIST']),
     loadUsersList () {
-      this.LOAD_USERS_LIST('0a5cf475-665b-6c56-86e2-d433fcd76d35')
+      this.LOAD_USERS_LIST(this.user.avtkey)
     }
   },
   computed: {
     ...mapState('user', ['user']),
-    ...mapGetters('users', ['GET_USERS'])
+    ...mapState('users', ['users'])
   },
   mounted () {
     this.loadUsersList()
-    console.log('Mounted USER >>> ' + JSON.stringify(this.user))
-    console.log('Mounted USERS >>> ' + JSON.stringify(this.users))
   }
 }
 </script>
