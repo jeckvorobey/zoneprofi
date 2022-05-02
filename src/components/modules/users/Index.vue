@@ -49,42 +49,61 @@
                       <tr role="row">
                         <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                        >Rendering engine
+                        >
+                          ID
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Browser: activate to sort column ascending">Browser
+                            aria-label="Browser: activate to sort column ascending">
+                          Имя/Логин
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="Platform(s): activate to sort column ascending">
-                          Platform(s)
+                          Телеграм
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="Engine version: activate to sort column ascending">
-                          Engine version
+                          Баланс
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="CSS grade: activate to sort column ascending">CSS grade
+                            aria-label="CSS grade: activate to sort column ascending">
+                          Блокировка
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="CSS grade: activate to sort column ascending">
+                          Модерация
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="CSS grade: activate to sort column ascending">
+                          часы работы
                         </th>
                       </tr>
+
+
                       </thead>
                       <tbody>
-                      <tr role="row" class="odd">
-                        <td
-                            class="sorting_1"
-                            v-for="item in users" :key="item">
-                          {{ item.info.name }}
-                        </td>
+                      <tr
+                          role="row"
+                          class="odd"
+                          v-for="item in users" :key="item.id"
+                      >
+                        <td class="sorting_1">{{ item.id }}</td>
+                        <td class="sorting_1">{{ item.info.name }} {{item.info.login !== '' ? ' / ' + item.info.login : ''  }}</td>
+                        <td class="sorting_1">@{{ item.info.TGname }}</td>
+                        <td class="sorting_1">{{ item.info.balans }}</td>
+                        <td class="sorting_1">{{ item.info.ban }}</td>
+                        <td class="sorting_1">{{ item.info.moder === '1' ? 'Да' : 'Нет' }}</td>
+                        <td class="sorting_1">{{ item.work }}</td>
                       </tr>
                       </tbody>
-                      <tfoot>
-                      <tr>
-                        <th rowspan="1" colspan="1">Rendering engine</th>
-                        <th rowspan="1" colspan="1">Browser</th>
-                        <th rowspan="1" colspan="1">Platform(s)</th>
-                        <th rowspan="1" colspan="1">Engine version</th>
-                        <th rowspan="1" colspan="1">CSS grade</th>
-                      </tr>
-                      </tfoot>
+<!--                      <tfoot>-->
+<!--                      <tr>-->
+<!--                        <th rowspan="1" colspan="1">Rendering engine</th>-->
+<!--                        <th rowspan="1" colspan="1">Browser</th>-->
+<!--                        <th rowspan="1" colspan="1">Platform(s)</th>-->
+<!--                        <th rowspan="1" colspan="1">Engine version</th>-->
+<!--                        <th rowspan="1" colspan="1">CSS grade</th>-->
+<!--                      </tr>-->
+<!--                      </tfoot>-->
                     </table>
                   </div>
                 </div>
