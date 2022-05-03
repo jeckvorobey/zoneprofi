@@ -68,6 +68,10 @@
                             aria-label="CSS grade: activate to sort column ascending">
                           Часы работы
                         </th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="CSS grade: activate to sort column ascending">
+                          Дополнительно
+                        </th>
                       </tr>
 
 
@@ -85,6 +89,14 @@
                         <td class="sorting_1">@{{ item.info.TGname }}</td>
                         <td class="sorting_1">{{ item.info.ban }}</td>
                         <td class="sorting_1">{{ item.work[Object.keys(item.work)[0]] }}</td>
+                        <td class="sorting_1 center">
+                          <span class="glyphicon glyphicon-pencil"></span>
+                          <span
+                              class="glyphicon glyphicon-ban-circle"
+                              v-if="item.info.ban === '0'">
+                          </span>
+                          <span class="glyphicon glyphicon-trash"></span>
+                        </td>
                       </tr>
                       </tbody>
 <!--                      <tfoot>-->
