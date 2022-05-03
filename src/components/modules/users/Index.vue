@@ -84,9 +84,10 @@
                       <tr
                           role="row"
                           class="odd"
-                          v-for="item in users" :key="item.id"
+                          v-for="{key, item} in users"
+                          :key="key"
                       >
-                        <td class="sorting_1">{{ item.id }}</td>
+                        <td class="sorting_1">{{ key }}</td>
                         <td class="sorting_1">{{ item.info.name }} {{item.info.login !== '' ? ' / ' + item.info.login : ''  }}</td>
                         <td class="sorting_1">@{{ item.info.TGname }}</td>
                         <td class="sorting_1">{{ item.info.balans }}</td>
