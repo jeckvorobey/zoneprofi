@@ -61,20 +61,12 @@
                           Телеграм
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Engine version: activate to sort column ascending">
-                          Баланс
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="CSS grade: activate to sort column ascending">
                           Блокировка
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="CSS grade: activate to sort column ascending">
-                          Модерация
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="CSS grade: activate to sort column ascending">
-                          часы работы
+                          Часы работы
                         </th>
                       </tr>
 
@@ -84,16 +76,15 @@
                       <tr
                           role="row"
                           class="odd"
-                          v-for="{key, item} in users"
-                          :key="key"
+                          v-bind:class="{ 'bg-yellow-active': item.info.moder === '0' }"
+                          v-for="(item, index) in users"
+                          :key="index"
                       >
-                        <td class="sorting_1">{{ key }}</td>
-                        <td class="sorting_1">{{ item.info.name }} {{item.info.login !== '' ? ' / ' + item.info.login : ''  }}</td>
+                        <td class="sorting_1">{{ index }}</td>
+                        <td class="sorting_1">{{ item.info.name }} {{ item.info.login !== '' ? ' / ' + item.info.login : '' }} ({{ item.info.balans }} &#8381;)</td>
                         <td class="sorting_1">@{{ item.info.TGname }}</td>
-                        <td class="sorting_1">{{ item.info.balans }}</td>
                         <td class="sorting_1">{{ item.info.ban }}</td>
-                        <td class="sorting_1">{{ item.info.moder === '1' ? 'Да' : 'Нет' }}</td>
-                        <td class="sorting_1">{{ item.work }}</td>
+                        <td class="sorting_1">{{ item.work[Object.keys(item.work)[0]] }}</td>
                       </tr>
                       </tbody>
 <!--                      <tfoot>-->
@@ -158,7 +149,9 @@ import {mapActions, mapState} from 'vuex'
 export default {
   name: 'UsersIndex',
   data: function () {
-    return {}
+    return {
+      isModer: false
+    }
   },
   methods: {
     ...mapActions('users', ['LOAD_USERS_LIST']),
