@@ -24,20 +24,21 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="dataTables_length" id="example1_length">
-                      <label>Show <select name="example1_length" aria-controls="example1" class="form-control input-sm">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                      </select> entries
+                      <label>Показывать по:
+                        <select name="example1_length" aria-controls="example1" class="form-control input-sm">
+                          <option value="10">10</option>
+                          <option value="25">25</option>
+                          <option value="50">50</option>
+                          <option value="100">100</option>
+                        </select> записей
                       </label>
                     </div>
                   </div>
                   <div class="col-sm-6">
-                    <div id="example1_filter" class="dataTables_filter"><label>Search: <input type="search"
-                                                                                              class="form-control input-sm"
-                                                                                              placeholder=""
-                                                                                              aria-controls="example1"></label>
+                    <div id="example1_filter" class="dataTables_filter">
+                      <label>Search:
+                        <input type="search" class="form-control input-sm" placeholder=""
+                               aria-controls="example1"></label>
                     </div>
                   </div>
                 </div>
@@ -69,74 +70,92 @@
                           Дополнительно
                         </th>
                       </tr>
-
-
                       </thead>
                       <tbody>
                       <tr
                           role="row"
                           class="odd"
-                          v-bind:class="{ 'bg-yellow-active': item.info.moder === '0' }"
-                          v-for="(item, index) in users"
-                          :key="index"
+                          :class="{ 'bg-yellow-active': item['1'].info.moder === '0' }"
+                          v-for="(item) in this.paginatedUsers"
+                          :key="item.id"
                       >
-                        <td class="sorting_1">{{ index }}</td>
-                        <td class="sorting_1">{{ item.info.name }} {{ item.info.login !== '' ? ' / ' + item.info.login : '' }} ({{ item.info.balans }} &#8381;)</td>
-                        <td class="sorting_1">@{{ item.info.TGname }}</td>
-                        <td class="sorting_1">{{ item.work[Object.keys(item.work)[0]] }}</td>
+                        <td class="sorting_1">{{ item['0'] }}</td>
+                        <td class="sorting_1">{{ item['1'].info.name }}
+                          {{ item['1'].info.login !== '' ? ' / ' + item['1'].info.login : '' }}
+                          ({{ item['1'].info.balans }} &#8381;)
+                        </td>
+                        <td class="sorting_1">@{{ item['1'].info.TGname }}</td>
+                        <td class="sorting_1">{{ item['1'].work[Object.keys(item['1'].work)[0]] }}</td>
                         <td class="sorting_1 center">
                           <span class="glyphicon glyphicon-pencil"></span>
                           <span
                               class="glyphicon glyphicon-ban-circle"
-                              v-if="item.info.ban === '0'">
+                              v-if="item['1'].info.ban === '0'">
                           </span>
                           <span class="glyphicon glyphicon-trash"></span>
                         </td>
                       </tr>
                       </tbody>
-<!--                      <tfoot>-->
-<!--                      <tr>-->
-<!--                        <th rowspan="1" colspan="1">Rendering engine</th>-->
-<!--                        <th rowspan="1" colspan="1">Browser</th>-->
-<!--                        <th rowspan="1" colspan="1">Platform(s)</th>-->
-<!--                        <th rowspan="1" colspan="1">Engine version</th>-->
-<!--                        <th rowspan="1" colspan="1">CSS grade</th>-->
-<!--                      </tr>-->
-<!--                      </tfoot>-->
+                      <!--                      <tfoot>-->
+                      <!--                      <tr>-->
+                      <!--                        <th rowspan="1" colspan="1">Rendering engine</th>-->
+                      <!--                        <th rowspan="1" colspan="1">Browser</th>-->
+                      <!--                        <th rowspan="1" colspan="1">Platform(s)</th>-->
+                      <!--                        <th rowspan="1" colspan="1">Engine version</th>-->
+                      <!--                        <th rowspan="1" colspan="1">CSS grade</th>-->
+                      <!--                      </tr>-->
+                      <!--                      </tfoot>-->
                     </table>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-sm-5">
-                    <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 10 of
-                      57 entries
+                    <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Показано с 1 по 10
+                      из
+                      {{ users.length }} записей
                     </div>
                   </div>
                   <div class="col-sm-7">
-                    <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                    <nav aria-label="Page navigation">
                       <ul class="pagination">
-                        <li class="paginate_button previous disabled" id="example1_previous"><a href="#"
-                                                                                                aria-controls="example1"
-                                                                                                data-dt-idx="0"
-                                                                                                tabindex="0">Previous</a>
+                        <li class="paginate_button"
+                            :class="{'active': page === pageNumber}"
+                            v-for="page in pages"
+                            :key="page.id"
+                        >
+                          <span aria-controls="example1"
+                             data-dt-idx="0"
+                             tabindex="0"
+                             @click="pageClick(page)"
+                          >{{ page }}
+                          </span>
                         </li>
-                        <li class="paginate_button active"><a href="#" aria-controls="example1" data-dt-idx="1"
-                                                              tabindex="0">1</a></li>
-                        <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2"
-                                                        tabindex="0">2</a></li>
-                        <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3"
-                                                        tabindex="0">3</a></li>
-                        <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4"
-                                                        tabindex="0">4</a></li>
-                        <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5"
-                                                        tabindex="0">5</a></li>
-                        <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6"
-                                                        tabindex="0">6</a></li>
-                        <li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1"
-                                                                               data-dt-idx="7" tabindex="0">Next</a>
-                        </li>
+
+                        <!--                        <li class="paginate_button previous disabled" id="example1_previous">-->
+                        <!--                          <a href="#"-->
+                        <!--                             aria-controls="example1"-->
+                        <!--                             data-dt-idx="0"-->
+                        <!--                             tabindex="0">Previous-->
+                        <!--                          </a>-->
+                        <!--                        </li>-->
+                        <!--                        <li class="paginate_button active">-->
+                        <!--                          <a href="#" aria-controls="example1" data-dt-idx="1"-->
+                        <!--                                                              tabindex="0">1</a></li>-->
+                        <!--                        <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2"-->
+                        <!--                                                        tabindex="0">2</a></li>-->
+                        <!--                        <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3"-->
+                        <!--                                                        tabindex="0">3</a></li>-->
+                        <!--                        <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4"-->
+                        <!--                                                        tabindex="0">4</a></li>-->
+                        <!--                        <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5"-->
+                        <!--                                                        tabindex="0">5</a></li>-->
+                        <!--                        <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6"-->
+                        <!--                                                        tabindex="0">6</a></li>-->
+                        <!--                        <li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1"-->
+                        <!--                                                                               data-dt-idx="7" tabindex="0">Next</a>-->
+                        <!--                        </li>-->
                       </ul>
-                    </div>
+                    </nav>
                   </div>
                 </div>
               </div>
@@ -157,18 +176,31 @@ export default {
   name: 'UsersIndex',
   data: function () {
     return {
-      isModer: false
+      showPage: 10,
+      pageNumber: 1
     }
   },
   methods: {
     ...mapActions('users', ['LOAD_USERS_LIST']),
     loadUsersList () {
       this.LOAD_USERS_LIST(this.user.avtkey)
+    },
+    pageClick (page) {
+      this.pageNumber = page
     }
   },
   computed: {
     ...mapState('user', ['user']),
-    ...mapState('users', ['users'])
+    ...mapState('users', ['users']),
+    pages () {
+      return Math.ceil(this.users.length / this.showPage)
+    },
+    paginatedUsers () {
+      let fromPageNumber = (this.pageNumber - 1) * this.showPage
+      let toPageNumber = fromPageNumber + this.showPage
+      // console.log(this.users)
+      return this.users.slice(fromPageNumber, toPageNumber)
+    }
   },
   mounted () {
     this.loadUsersList()

@@ -4,6 +4,9 @@ import VueRouter from 'vue-router'
 import routes from './routes'
 import store from './store/index'
 
+require('bootstrap')
+require('admin-lte')
+
 Vue.use(VueRouter)
 
 // Import top level component
@@ -47,6 +50,4 @@ new Vue({
   render: h => h(App)
 })
 
-require('bootstrap')
-require('admin-lte')
 // require('../node_modules/admin-lte/dist/js/demo.js')

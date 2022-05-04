@@ -1,3 +1,3 @@
 export interface UsersState {
-    users: object
+    users: Array<any>
 }

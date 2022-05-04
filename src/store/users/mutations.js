@@ -4,7 +4,7 @@ export default {
     /**
     *
     * @param {Object} state
-    * @param { object } users
+    * @param { Array } users
     */
   [SET_USERS] (state, users) {
     state.users = users

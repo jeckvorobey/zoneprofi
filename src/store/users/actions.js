@@ -15,9 +15,9 @@ export async function LOAD_USERS_LIST ({commit}, key) {
     })
   })
     .then(r => {
-      //  console.log('USERS (Action GET_USERS_LIST ) >>> \n' + JSON.stringify(r))
+     // console.log('USERS (Action GET_USERS_LIST ) >>> \n' + JSON.stringify(Object.entries(r.data.res)))
       if (r.data.code === '200') {
-        commit(SET_USERS, r.data.res)
+        commit(SET_USERS, Object.entries(r.data.res))
       }
     }).catch(error => console.log(error))
 }
