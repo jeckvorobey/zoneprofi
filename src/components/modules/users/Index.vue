@@ -20,16 +20,18 @@
             <!--              <h3 class="box-title">Data Table With Full Features</h3>-->
             <!--            </div>-->
             <div class="box-body">
-              <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+              <div class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="dataTables_length" id="example1_length">
                       <label>Показывать по:
-                        <select name="example1_length" aria-controls="example1" class="form-control input-sm">
-                          <option value="10">10</option>
-                          <option value="25">25</option>
-                          <option value="50">50</option>
-                          <option value="100">100</option>
+                        <select class="form-control input-sm"
+                                v-model="select">
+                          <option
+                              v-for="(select, index) in selects"
+                              :key="index"
+                          >{{ select }}
+                          </option>
                         </select> записей
                       </label>
                     </div>
@@ -110,7 +112,8 @@
                 </div>
                 <div class="row">
                   <div class="col-sm-5">
-                    <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Показано с 1 по 10
+                    <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Показано с
+                      {{ fromPageNumber + 1 }} по {{ toPageNumber }}
                       из
                       {{ users.length }} записей
                     </div>
@@ -123,12 +126,7 @@
                             v-for="page in pages"
                             :key="page.id"
                         >
-                          <span aria-controls="example1"
-                             data-dt-idx="0"
-                             tabindex="0"
-                             @click="pageClick(page)"
-                          >{{ page }}
-                          </span>
+                          <span @click="pageClick(page)">{{ page }}</span>
                         </li>
 
                         <!--                        <li class="paginate_button previous disabled" id="example1_previous">-->
@@ -176,8 +174,11 @@ export default {
   name: 'UsersIndex',
   data: function () {
     return {
-      showPage: 10,
-      pageNumber: 1
+      pageNumber: 1,
+      fromPageNumber: null,
+      toPageNumber: null,
+      selects: [10, 25, 50, 100],
+      select: 10
     }
   },
   methods: {
@@ -193,13 +194,16 @@ export default {
     ...mapState('user', ['user']),
     ...mapState('users', ['users']),
     pages () {
-      return Math.ceil(this.users.length / this.showPage)
+      if (this.users) {
+        return Math.ceil(this.users.length / +this.select)
+      }
     },
     paginatedUsers () {
-      let fromPageNumber = (this.pageNumber - 1) * this.showPage
-      let toPageNumber = fromPageNumber + this.showPage
-      // console.log(this.users)
-      return this.users.slice(fromPageNumber, toPageNumber)
+      if (this.users) {
+        this.fromPageNumber = (this.pageNumber - 1) * +this.select
+        this.toPageNumber = this.fromPageNumber + +this.select
+        return this.users.slice(this.fromPageNumber, this.toPageNumber)
+      }
     }
   },
   mounted () {
