@@ -1,11 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import 'admin-lte'
+import 'bootstrap'
 import routes from './routes'
 import store from './store/index'
-
-require('bootstrap')
-require('admin-lte')
 
 Vue.use(VueRouter)
 
@@ -49,5 +47,3 @@ new Vue({
   store,
   render: h => h(App)
 })
-
-// require('../node_modules/admin-lte/dist/js/demo.js')

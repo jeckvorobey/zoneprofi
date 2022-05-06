@@ -81,20 +81,23 @@
                           v-for="(item) in this.paginatedUsers"
                           :key="item.id"
                       >
-                        <td class="sorting_1">{{ item['0'] }}</td>
-                        <td class="sorting_1">{{ item['1'].info.name }}
-                          {{ item['1'].info.login !== '' ? ' / ' + item['1'].info.login : '' }}
-                          ({{ item['1'].info.balans }} &#8381;)
+                        <td class="sorting">{{ item['0'] }}</td>
+                        <td class="sorting">
+                          <a href="#">
+                            {{ item['1'].info.name }}
+                            {{ item['1'].info.login !== '' ? ' / ' + item['1'].info.login : '' }}
+                            ({{ item['1'].info.balans }} &#8381;)
+                          </a>
                         </td>
-                        <td class="sorting_1">@{{ item['1'].info.TGname }}</td>
-                        <td class="sorting_1">{{ item['1'].work[Object.keys(item['1'].work)[0]] }}</td>
-                        <td class="sorting_1 center">
+                        <td class="sorting">@{{ item['1'].info.TGname }}</td>
+                        <td class="sorting">{{ item['1'].work[Object.keys(item['1'].work)[0]] }}</td>
+                        <td class="sorting center">
                           <span class="glyphicon glyphicon-pencil"></span>
                           <span
                               class="glyphicon glyphicon-ban-circle"
                               v-if="item['1'].info.ban === '0'">
                           </span>
-                          <span class="glyphicon glyphicon-trash"></span>
+                          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                         </td>
                       </tr>
                       </tbody>

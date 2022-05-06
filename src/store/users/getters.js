@@ -2,8 +2,8 @@
 *
 *
 * @param { UsersState } state
-* @return { object }
+* @return { Array }
 */
 export function GET_USERS (state) {
-  return state.users
+  return state.users;
 }
