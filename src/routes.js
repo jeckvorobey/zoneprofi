@@ -1,15 +1,8 @@
-import Login from './components/Login.vue'
-import Dashboard from './components/Dashboard.vue'
-import DashboardIndex from './components/modules/dashboard/Index.vue'
-import UsersIndex from './components/modules/users/Index'
-import NotFound from './components/modules/dashboard/404.vue'
-import WidgetsIndex from './components/modules/widgets/Index.vue'
-import UIButtons from './components/modules/ui/Buttons.vue'
-import UIGeneral from './components/modules/ui/General.vue'
-import UIIcons from './components/modules/ui/Icons.vue'
-import UIModals from './components/modules/ui/Modals.vue'
-import UISliders from './components/modules/ui/Sliders.vue'
-import UITimeline from './components/modules/ui/Timeline.vue'
+import Login from './views/Login.vue'
+import Dashboard from './views/Dashboard.vue'
+import DashboardIndex from './modules/dashboard/Index.vue'
+import UsersIndex from './modules/users/Index'
+import NotFound from './modules/dashboard/404.vue'
 
 // Routes
 const routes = [
@@ -18,7 +11,6 @@ const routes = [
     name: 'login',
     component: Login,
     beforeEnter: (to, from, next) => {
-      document.body.className = 'login-page'
       next()
     }
   }, {
@@ -26,15 +18,8 @@ const routes = [
     component: Dashboard,
     meta: {auth: true},
     beforeEnter: (to, from, next) => {
-      document.body.className += ' skin-blue sidebar-mini'
       next()
     },
-    // activate: function () {
-    //   this.$nextTick(function () {
-    //     // => 'DOM loaded and ready'
-    //     alert('test')
-    //   })
-    // },
     children: [
       {
         path: '',
@@ -47,34 +32,6 @@ const routes = [
         path: '/users',
         name: 'users',
         component: UsersIndex
-      }, {
-        path: '/widgets',
-        name: 'widgets',
-        component: WidgetsIndex
-      }, {
-        path: '/ui/buttons',
-        name: 'ui-buttons',
-        component: UIButtons
-      }, {
-        path: '/ui/general',
-        name: 'ui-general',
-        component: UIGeneral
-      }, {
-        path: '/ui/icons',
-        name: 'ui-icons',
-        component: UIIcons
-      }, {
-        path: '/ui/modals',
-        name: 'ui-modals',
-        component: UIModals
-      }, {
-        path: '/ui/sliders',
-        name: 'ui-sliders',
-        component: UISliders
-      }, {
-        path: '/ui/timeline',
-        name: 'ui-timeline',
-        component: UITimeline
       }, {
         path: '*',
         name: '404',

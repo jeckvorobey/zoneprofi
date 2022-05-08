@@ -7,6 +7,6 @@ export default {
    * @param {Array} users
    */
   [SET_USERS] (state, users) {
-    state.users = users;
+    state.users = users
   }
 }

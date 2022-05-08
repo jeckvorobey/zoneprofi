@@ -1,6 +1,6 @@
-/** @var { ModalState } */
+/** @let { ModalState } */
 const STATE = {
-    isVisible: false,
-};
+  inVisible: false
+}
 
-export default STATE;
+export default STATE

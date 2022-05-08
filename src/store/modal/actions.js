@@ -1,10 +1,18 @@
-import { SET_ISVISIBLE } from './mutation-types';
+import {SET_INVISIBLE, TOGGLE_INVISIBLE} from './mutation-types'
 
 /**
-*
-* @param { function } commit
-* @param { boolean } isVisible
-*/
-export function setIsVisible({ commit }, { isVisible }) {
-    commit(SET_ISVISIBLE, { isVisible });
+ *
+ * @param { function } commit
+ * @param { boolean } inVisible
+ */
+export function setInVisible ({commit}, inVisible) {
+  commit(SET_INVISIBLE, inVisible)
+}
+
+/**
+ *
+ * @param { function } commit
+ */
+export function toggleInVisible ({commit}) {
+  commit(TOGGLE_INVISIBLE)
 }

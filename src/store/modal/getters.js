@@ -1,9 +1,9 @@
 /**
-*
-* 
-* @param { ModalState } state
-* @return { boolean }
-*/
-export function GET_ISVISIBLE(state) {
-    return state.isVisible;
+ *
+ *
+ * @param { ModalState } state
+ * @return { boolean }
+ */
+export function GET_INVISIBLE (state) {
+  return state.inVisible
 }

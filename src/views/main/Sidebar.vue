@@ -1,0 +1,112 @@
+<template>
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Logo -->
+    <router-link to="/" class="brand-link">
+      <img src="static/img/logo/ZPlogo.jpg" alt="ZonePro LOGO" class="brand-image img-circle elevation-3">
+      <!--       mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini logo-xs"><b>ZP</b>A</span>
+      <span class="brand-text font-weight-light"><b>ZonePro</b>Админ</span>
+    </router-link>
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="static/img/user2-160x160.jpg" class="user-image img-circle mt-2 elevation-2 " alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">{{ GET_USER.username }}</a>
+          <span class="text-green">{{ GET_USER.role }}</span>
+        </div>
+        <button class="btn btn-dark"
+                @click.prevent="logout()"
+        >
+          <i class="fa fa-sign-out"></i>
+        </button>
+      </div>
+      <!-- search form -->
+      <!--      <form class="form-inline">-->
+      <!--        <div class="input-group">-->
+      <!--          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">-->
+      <!--          <div class="input-group-append">-->
+      <!--            <button class="btn btn-sidebar" type="submit">-->
+      <!--              <i class="fas fa-search"></i>-->
+      <!--            </button>-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--      </form>-->
+      <!-- /.search form -->
+      <!-- sidebar menu: -->
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+
+          <li class="nav-item">
+            <router-link :to="{ name: 'dashboard' }" class="nav-link">
+              <i class="nav-icon fa fa-dashboard"></i>
+              <p>
+                Панель
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'users' }  " class="nav-link">
+              <i class="nav-icon fa fa-users"></i>
+              <p>
+                Пользоваетли
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Starter Pages
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Active Page</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Inactive Page</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+</template>
+
+<script>
+import {mapGetters, mapActions} from 'vuex'
+
+export default {
+  name: 'DashboardSidebar',
+  methods: {
+    ...mapActions('user', ['logAut']),
+    logout () {
+      this.logAut()
+      if (!this.GET_USER && !localStorage.getItem('avtuser')) {
+        this.$router.push({name: 'login'})
+      }
+    }
+  },
+  computed: {
+    ...mapGetters('user', ['GET_USER'])
+  }
+}
+</script>

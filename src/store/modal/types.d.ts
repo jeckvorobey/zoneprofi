@@ -1,3 +1,3 @@
 export interface ModalState {
-    isVisible: boolean;
+    inVisible: boolean;
 }
