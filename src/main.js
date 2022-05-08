@@ -3,9 +3,8 @@ import VueRouter from 'vue-router'
 import routes from './routes'
 import store from './store/index'
 
-// import 'admin-lte'
-// import 'bootstrap'
-import 'assets/style/styles.scss'
+import 'bootstrap'
+import 'admin-lte'
 
 Vue.use(VueRouter)
 

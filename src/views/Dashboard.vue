@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <app-header></app-header>
 
     <!-- Left side column. contains the sidebar -->
