@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import 'admin-lte'
-import 'bootstrap'
 import routes from './routes'
 import store from './store/index'
+
+import 'admin-lte'
+import 'bootstrap'
 
 Vue.use(VueRouter)
 
@@ -25,10 +26,9 @@ if (localStorage.getItem('avtkey')) {
     .then(() => {
       // Some middleware to help us ensure the user is authenticated.
       if (store.getters['user/GET_USER']) {
-        router.push({name: 'dashboard'})
+        router.push('/')
       }
-    })
-    .catch(e => console.log(e))
+    }).catch(e => console.log(e))
 }
 
 router.beforeEach((to, from, next) => {
