@@ -57,6 +57,7 @@ export async function AUTH_KEY_USER ({commit}, avtkey) {
 /**
  * @param { function } commit
  */
-export function LOGOUT ({commit}) {
+export function logAut ({commit}) {
   commit(REMOVE_USER)
+  localStorage.removeItem('avtkey')
 }

@@ -52,16 +52,16 @@
                   </div>
                   <div class="row">
                     <div class="col-sm-12">
-                      <table class="table table-responsive table-hover table-head-fixed">
+                      <table class="table table-responsive table-bordered table-striped table-hover dataTable table-head-fixed">
                         <thead class="text-nowrap">
                         <tr>
                           <th class="sorting">
                             ID
                           </th>
-                          <th class="sorting" >
+                          <th class="sorting">
                             Имя/Логин
                           </th>
-                          <th class="sorting" >
+                          <th class="sorting">
                             Телеграм
                           </th>
                           <th class="sorting">
@@ -92,15 +92,16 @@
                           </span>
                           </td>
                           <td class="sorting">@{{ item['1'].info.TGname }}</td>
-                          <td class="sorting">{{ item['1'].tags}}</td>
+                          <td class="sorting">{{ item['1'].tags }}</td>
                           <td class="sorting">{{ item['1'].work[Object.keys(item['1'].work)[0]] }}</td>
-                          <td class="sorting center">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                            <span
-                              class="glyphicon glyphicon-ban-circle"
-                              v-if="item['1'].info.ban === '0'">
-                          </span>
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                          <td class="sorting btn-group">
+                            <button class="btn btn-default">
+                              <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </button><button class="btn btn-default">
+                              <i class="fa fa-ban" aria-hidden="true"></i>
+                            </button><button class="btn btn-default">
+                              <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
                           </td>
                         </tr>
                         </tbody>
