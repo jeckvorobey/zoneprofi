@@ -21,12 +21,12 @@
 
               <!--              </div>-->
               <div class="card-body">
-                <div class="dataTables_wrapper form-inline dt-bootstrap4">
+                <div class="dataTables_wrapper dt-bootstrap4">
                   <div class="row">
-                    <div class="col--6">
-                      <div class="dataTables_length" id="example_length">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="dataTables_length">
                         <label>Показывать по:
-                          <select class="form-control input-sm"
+                          <select class="custom-select-sm mx-2"
                                   v-model="select">
                             <option
                               v-for="(select, index) in selects"

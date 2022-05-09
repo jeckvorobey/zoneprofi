@@ -3,6 +3,7 @@ import Dashboard from './views/Dashboard.vue'
 import DashboardIndex from './modules/dashboard/Index.vue'
 import UsersIndex from './modules/users/Index'
 import NotFound from './modules/dashboard/404.vue'
+import TagsIndex from './modules/Tags/TagsIndex'
 
 // Routes
 const routes = [
@@ -35,6 +36,10 @@ const routes = [
         path: '/users',
         name: 'users',
         component: UsersIndex
+      }, {
+        path: '/tags',
+        name: 'tags',
+        component: TagsIndex
       }, {
         path: '*',
         name: '404',
