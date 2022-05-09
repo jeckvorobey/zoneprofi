@@ -40,7 +40,12 @@
                     <div class="col-sm-12 col-md-6">
                       <div class="card-tools">
                         <div class="input-group input-group-sm">
-                          <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                          <input type="text"
+                                 name="table_search"
+                                 class="form-control float-right"
+                                 placeholder="Search"
+                                 v-model="search"
+                          >
                           <div class="input-group-append">
                             <button type="submit" class="btn btn-default">
                               <i class="fas fa-search"></i>
@@ -80,17 +85,17 @@
                         <tr
                           role="row"
                           class="odd"
-                          :class="{ 'bg-yellow-active': item['1'].info.moder === '0' }"
-                          v-for="(item) in this.paginatedUsers"
+                          :class="{ 'bg-orange': item['1'].info.moder === '0' }"
+                          v-for="(item) in paginatedUsers"
                           :key="item.id"
                         >
                           <td class="sorting">{{ item['0'] }}</td>
                           <td class="sorting">
-                          <span @click="toggleModal">
+                          <a @click="toggleModal">
                             {{ item['1'].info.name }}
                             {{ item['1'].info.login !== '' ? ' / ' + item['1'].info.login : '' }}
                             ({{ item['1'].info.balans }} &#8381;)
-                          </span>
+                          </a>
                           </td>
                           <td class="sorting">@{{ item['1'].info.TGname }}</td>
                           <td class="sorting">{{ item['1'].tags }}</td>
@@ -120,30 +125,44 @@
                     </div>
                     <div class="col-sm-12 col-md-7">
                       <div class="dataTables_paginate paging_simple_numbers">
-                        <ul class="pagination">
-                          <li class="paginate_button page-item previous disabled">
-                            <a href="#" aria-controls="table_users" data-dt-idx="0" tabindex="0" class="page-link">
-                              Previous
-                            </a>
-                          </li>
-                          <li class="paginate_button page-item"
-                              :class="{'active': page === pageNumber}"
-                              v-for="page in pages"
-                              :key="page.id"
-                          >
-                            <a href="#" aria-controls="table_users" class="page-link" @click.prevent="pageClick(page)">{{
-                                page
-                              }}</a>
-                          </li>
-                          <li class=" paginate_button page-item next"
-                              id="example2_next">
-                            <a href="#"
-                               aria-controls="table_users"
-                               tabindex="0"
-                               class="page-link">Next
-                            </a>
-                          </li>
-                        </ul>
+                        <paginate
+                          :page-count="pages"
+                          :click-handler="pageClick"
+                          :prev-text="'Назад'"
+                          :next-text="'Вперед'"
+                          :container-class="'pagination'"
+                          :page-class="'paginate_button page-item'"
+                          :page-link-class="'page-link'"
+                          :prev-class="'paginate_button page-item previous'"
+                          :prev-link-class="'page-link'"
+                          :next-link-class="'page-link'"
+                          :next-class="'paginate_button page-item next'"
+                        >
+                        </paginate>
+                        <!--                        <ul class="pagination">-->
+                        <!--                          <li class="paginate_button page-item previous disabled">-->
+                        <!--                            <a href="#" aria-controls="table_users" data-dt-idx="0" tabindex="0" class="page-link">-->
+                        <!--                              Previous-->
+                        <!--                            </a>-->
+                        <!--                          </li>-->
+                        <!--                          <li class="paginate_button page-item"-->
+                        <!--                              :class="{'active': page === pageNumber}"-->
+                        <!--                              v-for="page in pages"-->
+                        <!--                              :key="page.id"-->
+                        <!--                          >-->
+                        <!--                            <a href="#" aria-controls="table_users" class="page-link" @click.prevent="pageClick(page)">{{-->
+                        <!--                                page-->
+                        <!--                              }}</a>-->
+                        <!--                          </li>-->
+                        <!--                          <li class=" paginate_button page-item next"-->
+                        <!--                              id="example2_next">-->
+                        <!--                            <a href="#"-->
+                        <!--                               aria-controls="table_users"-->
+                        <!--                               tabindex="0"-->
+                        <!--                               class="page-link">Next-->
+                        <!--                            </a>-->
+                        <!--                          </li>-->
+                        <!--                        </ul>-->
                       </div>
                     </div>
                     <!--                    <div class="col-sm-12 col-md-7">-->
@@ -186,6 +205,7 @@ export default {
   },
   data: function () {
     return {
+      search: '',
       pageNumber: 1,
       fromPageNumber: null,
       toPageNumber: null,
@@ -213,7 +233,7 @@ export default {
     ...mapGetters('users', ['GET_USERS']),
     ...mapGetters('modal', ['GET_INVISIBLE']),
     pages () {
-      if (this.GET_USER) {
+      if (this.GET_USERS.length > 0) {
         return Math.ceil(this.GET_USERS.length / +this.select)
       }
     },
@@ -221,7 +241,7 @@ export default {
       if (this.GET_USERS) {
         this.fromPageNumber = (this.pageNumber - 1) * +this.select
         this.toPageNumber = this.fromPageNumber + +this.select
-        return this.GET_USERS.slice(this.fromPageNumber, this.toPageNumber)
+        return this.GET_USERS.slice(this.fromPageNumber, this.toPageNumber).filter(users => users['1'].info.name.includes(this.search))
       }
     },
     showModal () {

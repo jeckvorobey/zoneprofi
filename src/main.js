@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './routes'
 import store from './store/index'
+import Paginate from 'vuejs-paginate'
 
 import 'bootstrap'
 import 'bs-custom-file-input'
@@ -11,6 +12,8 @@ import 'icheck'
 Vue.use(VueRouter)
 // Import top level component
 import App from './App.vue'
+
+Vue.component('Paginate', Paginate)
 
 // Routing logic
 const router = new VueRouter({
