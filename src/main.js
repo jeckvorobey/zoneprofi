@@ -6,9 +6,9 @@ import store from './store/index'
 import 'bootstrap'
 import 'bs-custom-file-input'
 import 'admin-lte'
+import 'icheck'
 
 Vue.use(VueRouter)
-
 // Import top level component
 import App from './App.vue'
 

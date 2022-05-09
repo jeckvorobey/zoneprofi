@@ -11,6 +11,7 @@ const routes = [
     name: 'login',
     component: Login,
     beforeEnter: (to, from, next) => {
+      document.body.className = 'login-page'
       next()
     }
   }, {
@@ -18,6 +19,8 @@ const routes = [
     component: Dashboard,
     meta: {auth: true},
     beforeEnter: (to, from, next) => {
+      document.body.className = 'sidebar-mini'
+
       next()
     },
     children: [
