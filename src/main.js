@@ -4,6 +4,7 @@ import routes from './routes'
 import store from './store/index'
 
 import 'bootstrap'
+import 'bs-custom-file-input'
 import 'admin-lte'
 
 Vue.use(VueRouter)
