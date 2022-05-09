@@ -7,13 +7,12 @@
     <!-- /.login-logo -->
     <div class="login-box-body">
       <p class="login-box-msg">Для входа введите логин/пароль</p>
-      <form @submit.prevent="userAuth">
+      <form class="form-group" @submit.prevent="userAuth">
         <div v-if="error" class="alert alert-danger">
           <a class="close" data-dismiss="alert">&times;</a>
           {{ error }}
         </div>
         <!--        <div class="card">-->
-        <form class="form">
           <div class="input-group form-group row mb-3">
             <input type="text" class="form-control" placeholder="Логин" v-model="form.credentials.login">
             <div class="input-group-append">
@@ -38,10 +37,7 @@
             <div class="col-xs-4">
               <button type="submit" class="btn btn-primary btn-block  n-flat" :disabled="isDisabled">Вход</button>
             </div>
-            <!-- /.col -->
           </div>
-        </form>
-        <!--        </div>-->
       </form>
     </div>
   </div>
@@ -67,6 +63,7 @@ export default {
   methods: {
     ...mapActions('user', ['AUTH_USER']),
     userAuth () {
+      console.log(`form ${JSON.stringify(this.form)}`)
       if (this.form.credentials.pas !== '' && this.form.credentials.login !== '') {
         this.AUTH_USER(this.form)
           .then(() => {
@@ -81,9 +78,6 @@ export default {
     isDisabled () {
       return !(this.form.credentials.login !== '' && this.form.credentials.pas !== '')
     }
-  },
-  mounted () {
-    bsCustomFileInput.init()
   }
 }
 </script>
