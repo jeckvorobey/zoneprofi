@@ -52,7 +52,8 @@
                   </div>
                   <div class="row">
                     <div class="col-sm-12">
-                      <table class="table table-responsive table-bordered table-striped table-hover dataTable table-head-fixed">
+                      <table id="table_users"
+                             class="table table-responsive table-bordered table-striped table-hover dataTable table-head-fixed">
                         <thead class="text-nowrap">
                         <tr>
                           <th class="sorting">
@@ -97,23 +98,16 @@
                           <td class="sorting btn-group">
                             <button class="btn btn-default">
                               <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </button><button class="btn btn-default">
+                            </button>
+                            <button class="btn btn-default">
                               <i class="fa fa-ban" aria-hidden="true"></i>
-                            </button><button class="btn btn-default">
+                            </button>
+                            <button class="btn btn-default">
                               <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                           </td>
                         </tr>
                         </tbody>
-                        <!--                      <tfoot>-->
-                        <!--                      <tr>-->
-                        <!--                        <th rowspan="1" colspan="1">Rendering engine</th>-->
-                        <!--                        <th rowspan="1" colspan="1">Browser</th>-->
-                        <!--                        <th rowspan="1" colspan="1">Platform(s)</th>-->
-                        <!--                        <th rowspan="1" colspan="1">Engine version</th>-->
-                        <!--                        <th rowspan="1" colspan="1">CSS grade</th>-->
-                        <!--                      </tr>-->
-                        <!--                      </tfoot>-->
                       </table>
                     </div>
                   </div>
@@ -121,34 +115,34 @@
                     <div class="col-sm-12 col-md-5">
                       <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Показано с
                         {{ fromPageNumber + 1 }} по {{ toPageNumber }}
-                        из 666 записей
+                        из {{ GET_USERS.length }} записей
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-7">
-                      <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                      <div class="dataTables_paginate paging_simple_numbers">
                         <ul class="pagination">
-                          <!--                          <li class="paginate_button page-item previous disabled" id="example2_previous">-->
-                          <!--                            <a href="#" -->
-                          <!--                               aria-controls="example2"-->
-                          <!--                               data-dt-idx="0"-->
-                          <!--                               tabindex="0"-->
-                          <!--                               class="page-link">Previous</a>-->
-                          <!--                          </li>-->
+                          <li class="paginate_button page-item previous disabled">
+                            <a href="#" aria-controls="table_users" data-dt-idx="0" tabindex="0" class="page-link">
+                              Previous
+                            </a>
+                          </li>
                           <li class="paginate_button page-item"
                               :class="{'active': page === pageNumber}"
                               v-for="page in pages"
                               :key="page.id"
                           >
-                            <a href="#" class="page-link" @click.prevent="pageClick(page)">{{ page }}</a>
+                            <a href="#" aria-controls="table_users" class="page-link" @click.prevent="pageClick(page)">{{
+                                page
+                              }}</a>
                           </li>
-                          <!--       <li class=" paginate_button page-item next" -->
-                          <!--                              id="example2_next">-->
-                          <!--                            <a href="#"-->
-                          <!--                               aria-controls="example2"-->
-                          <!--                               data-dt-idx="7" tabindex="0"-->
-                          <!--                               class="page-link">Next-->
-                          <!--                            </a>-->
-                          <!--                          </li>-->
+                          <li class=" paginate_button page-item next"
+                              id="example2_next">
+                            <a href="#"
+                               aria-controls="table_users"
+                               tabindex="0"
+                               class="page-link">Next
+                            </a>
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -234,8 +228,8 @@ export default {
       return this.GET_INVISIBLE
     }
   },
-  mounted () {
-    this.loadUsersList()
+  async mounted () {
+    await this.loadUsersList()
   }
 }
 </script>

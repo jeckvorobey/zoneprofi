@@ -2,12 +2,10 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Logo -->
     <router-link to="/" class="brand-link">
-      <img src="static/img/logo/ZPlogo.jpg" alt="ZonePro LOGO" class="brand-image img-circle elevation-3">
+      <img src="static/img/logo/ZPlogo.jpg" alt="ZonePro LOGO" class="brand-image img-circle elevation-3 ">
       <!--       mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini logo-xs"><b>ZP</b>A</span>
       <span class="brand-text font-weight-light"><b>ZonePro</b>Админ</span>
     </router-link>
-    <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
       <!-- Sidebar user panel (optional) -->
