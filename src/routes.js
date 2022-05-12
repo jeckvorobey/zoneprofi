@@ -1,27 +1,19 @@
-import Login from './views/Login.vue'
-import Dashboard from './views/Dashboard.vue'
-import DashboardIndex from './modules/dashboard/Index.vue'
-import UsersIndex from './modules/users/Index'
-import NotFound from './modules/dashboard/404.vue'
-import TagsIndex from './modules/Tags/TagsIndex'
-
 // Routes
 const routes = [
   {
     path: '/login',
     name: 'login',
-    component: Login,
+    component: () => import('./views/Login.vue'),
     beforeEnter: (to, from, next) => {
       document.body.className = 'login-page'
       next()
     }
   }, {
     path: '/',
-    component: Dashboard,
+    component: () => import('./views/Dashboard.vue'),
     meta: {auth: true},
     beforeEnter: (to, from, next) => {
       document.body.className = 'sidebar-mini'
-
       next()
     },
     children: [
@@ -31,19 +23,19 @@ const routes = [
       }, {
         path: '/dashboard',
         name: 'dashboard',
-        component: DashboardIndex
+        component: () => import('./modules/dashboard/Index.vue')
       }, {
         path: '/users',
         name: 'users',
-        component: UsersIndex
+        component: () => import('./modules/users/Index.vue')
       }, {
         path: '/tags',
         name: 'tags',
-        component: TagsIndex
+        component: () => import('./modules/Tags/TagsIndex.vue')
       }, {
         path: '*',
         name: '404',
-        component: NotFound
+        component: () => import('./modules/dashboard/404.vue')
       }
     ]
   }, {
