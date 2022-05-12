@@ -2,8 +2,8 @@
 *
 *
 * @param { UsersState } state
-* @return { object }
+* @return { Array }
 */
-export function getUsers (state) {
+export function GET_USERS (state) {
   return state.users
 }

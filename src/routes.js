@@ -1,14 +1,9 @@
-import Login from './components/Login.vue'
-import Dashboard from './components/Dashboard.vue'
-import DashboardIndex from './components/modules/dashboard/Index.vue'
-import NotFound from './components/modules/dashboard/404.vue'
-import WidgetsIndex from './components/modules/widgets/Index.vue'
-import UIButtons from './components/modules/ui/Buttons.vue'
-import UIGeneral from './components/modules/ui/General.vue'
-import UIIcons from './components/modules/ui/Icons.vue'
-import UIModals from './components/modules/ui/Modals.vue'
-import UISliders from './components/modules/ui/Sliders.vue'
-import UITimeline from './components/modules/ui/Timeline.vue'
+import Login from './views/Login.vue'
+import Dashboard from './views/Dashboard.vue'
+import DashboardIndex from './modules/dashboard/Index.vue'
+import UsersIndex from './modules/users/Index'
+import NotFound from './modules/dashboard/404.vue'
+import TagsIndex from './modules/Tags/TagsIndex'
 
 // Routes
 const routes = [
@@ -23,53 +18,28 @@ const routes = [
   }, {
     path: '/',
     component: Dashboard,
-    meta: { auth: true },
+    meta: {auth: true},
     beforeEnter: (to, from, next) => {
-      document.body.className += ' skin-blue sidebar-mini'
+      document.body.className = 'sidebar-mini'
+
       next()
     },
-    // activate: function () {
-    //   this.$nextTick(function () {
-    //     // => 'DOM loaded and ready'
-    //     alert('test')
-    //   })
-    // },
     children: [
       {
         path: '',
-        redirect: { name: 'dashboard' }
+        redirect: {name: 'dashboard'}
       }, {
         path: '/dashboard',
         name: 'dashboard',
         component: DashboardIndex
       }, {
-        path: '/widgets',
-        name: 'widgets',
-        component: WidgetsIndex
+        path: '/users',
+        name: 'users',
+        component: UsersIndex
       }, {
-        path: '/ui/buttons',
-        name: 'ui-buttons',
-        component: UIButtons
-      }, {
-        path: '/ui/general',
-        name: 'ui-general',
-        component: UIGeneral
-      }, {
-        path: '/ui/icons',
-        name: 'ui-icons',
-        component: UIIcons
-      }, {
-        path: '/ui/modals',
-        name: 'ui-modals',
-        component: UIModals
-      }, {
-        path: '/ui/sliders',
-        name: 'ui-sliders',
-        component: UISliders
-      }, {
-        path: '/ui/timeline',
-        name: 'ui-timeline',
-        component: UITimeline
+        path: '/tags',
+        name: 'tags',
+        component: TagsIndex
       }, {
         path: '*',
         name: '404',

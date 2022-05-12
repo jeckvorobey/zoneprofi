@@ -1,0 +1,2 @@
+export const SET_INVISIBLE = 'Modal/SET_INVISIBLE'
+export const TOGGLE_INVISIBLE = 'Modal/SET_INVISIBLE'

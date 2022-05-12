@@ -12,7 +12,14 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
 
 module.exports = merge(baseWebpackConfig, {
   module: {
-    loaders: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
+    css: {
+      loaderOptions: {
+        sass: {
+          prependData: ' @import "@/assets/style/styles.scss"; '
+        }
+      }
+    }
+   // loaders: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
   },
   // eval-source-map is faster for development
   devtool: '#eval-source-map',

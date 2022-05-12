@@ -1,0 +1,255 @@
+<template>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Список пользователей</h1>
+          </div>
+        </div>
+        <!-- end row-->
+      </div>
+      <!--end container-fluid-->
+    </section>
+    <!-- end content-header-->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <!--              <div class="card-header">-->
+
+              <!--              </div>-->
+              <div class="card-body">
+                <div class="dataTables_wrapper dt-bootstrap4">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="dataTables_length">
+                        <label>Показывать по:
+                          <select class="custom-select-sm mx-2"
+                                  v-model="select">
+                            <option
+                              v-for="(select, index) in selects"
+                              :key="index"
+                            >{{ select }}
+                            </option>
+                          </select>записей
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                      <div class="card-tools">
+                        <div class="input-group input-group-sm">
+                          <input type="text"
+                                 name="table_search"
+                                 class="form-control float-right"
+                                 placeholder="Search"
+                                 v-model="search"
+                          >
+                          <div class="input-group-append">
+                            <button type="submit" class="btn btn-default">
+                              <i class="fas fa-search"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <table id="table_users"
+                             class="table table-responsive table-bordered table-striped table-hover dataTable table-head-fixed">
+                        <thead class="text-nowrap">
+                        <tr>
+                          <th class="sorting">
+                            ID
+                          </th>
+                          <th class="sorting">
+                            Имя/Логин
+                          </th>
+                          <th class="sorting">
+                            Телеграм
+                          </th>
+                          <th class="sorting">
+                            Теги
+                          </th>
+                          <th class="sorting">
+                            Часы работы
+                          </th>
+                          <th class="sorting">
+                            Дополнительно
+                          </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr
+                          role="row"
+                          class="odd"
+                          :class="{ 'bg-orange': item['1'].info.moder === '0' }"
+                          v-for="(item) in paginatedUsers"
+                          :key="item.id"
+                        >
+                          <td class="sorting">{{ item['0'] }}</td>
+                          <td class="sorting">
+                          <a @click="toggleModal">
+                            {{ item['1'].info.name }}
+                            {{ item['1'].info.login !== '' ? ' / ' + item['1'].info.login : '' }}
+                            ({{ item['1'].info.balans }} &#8381;)
+                          </a>
+                          </td>
+                          <td class="sorting">@{{ item['1'].info.TGname }}</td>
+                          <td class="sorting">{{ item['1'].tags }}</td>
+                          <td class="sorting">{{ item['1'].work[Object.keys(item['1'].work)[0]] }}</td>
+                          <td class="sorting btn-group">
+                            <button class="btn btn-default">
+                              <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-default">
+                              <i class="fa fa-ban" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-default">
+                              <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12 col-md-5">
+                      <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Показано с
+                        {{ fromPageNumber + 1 }} по {{ toPageNumber }}
+                        из {{ GET_USERS.length }} записей
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-md-7">
+                      <div class="dataTables_paginate paging_simple_numbers">
+                        <paginate
+                          :page-count="pages"
+                          :click-handler="pageClick"
+                          :prev-text="'Назад'"
+                          :next-text="'Вперед'"
+                          :container-class="'pagination'"
+                          :page-class="'paginate_button page-item'"
+                          :page-link-class="'page-link'"
+                          :prev-class="'paginate_button page-item previous'"
+                          :prev-link-class="'page-link'"
+                          :next-link-class="'page-link'"
+                          :next-class="'paginate_button page-item next'"
+                        >
+                        </paginate>
+                        <!--                        <ul class="pagination">-->
+                        <!--                          <li class="paginate_button page-item previous disabled">-->
+                        <!--                            <a href="#" aria-controls="table_users" data-dt-idx="0" tabindex="0" class="page-link">-->
+                        <!--                              Previous-->
+                        <!--                            </a>-->
+                        <!--                          </li>-->
+                        <!--                          <li class="paginate_button page-item"-->
+                        <!--                              :class="{'active': page === pageNumber}"-->
+                        <!--                              v-for="page in pages"-->
+                        <!--                              :key="page.id"-->
+                        <!--                          >-->
+                        <!--                            <a href="#" aria-controls="table_users" class="page-link" @click.prevent="pageClick(page)">{{-->
+                        <!--                                page-->
+                        <!--                              }}</a>-->
+                        <!--                          </li>-->
+                        <!--                          <li class=" paginate_button page-item next"-->
+                        <!--                              id="example2_next">-->
+                        <!--                            <a href="#"-->
+                        <!--                               aria-controls="table_users"-->
+                        <!--                               tabindex="0"-->
+                        <!--                               class="page-link">Next-->
+                        <!--                            </a>-->
+                        <!--                          </li>-->
+                        <!--                        </ul>-->
+                      </div>
+                    </div>
+                    <!--                    <div class="col-sm-12 col-md-7">-->
+                    <!--                      <div class="container-fluid">-->
+                    <!--                        <nav class="dataTables_paginate paging_simple_numbers">-->
+                    <!--                          <ul class="pagination">-->
+                    <!--                            <li class="paginate_button"-->
+                    <!--                                :class="{'active': page === pageNumber}"-->
+                    <!--                                v-for="page in pages"-->
+                    <!--                                :key="page.id"-->
+                    <!--                            >-->
+                    <!--                              <span @click="pageClick(page)">{{ page }}</span>-->
+                    <!--                            </li>-->
+                    <!--                          </ul>-->
+                    <!--                        </nav>-->
+                    <!--                      </div>-->
+                    <!--                    </div>-->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h1></h1>
+    </section>
+    <modal v-if="showModal"></modal>
+  </div>
+  <!--  end content-wrapper -->
+</template>
+
+<script>
+import {mapActions, mapGetters} from 'vuex'
+import Modal from '../../components/Modal'
+
+export default {
+  name: 'UsersIndex',
+  components: {
+    Modal
+  },
+  data: function () {
+    return {
+      search: '',
+      pageNumber: 1,
+      fromPageNumber: null,
+      toPageNumber: null,
+      selects: [10, 25, 50, 100],
+      select: 10
+    }
+  },
+  methods: {
+    ...mapActions('users', ['LOAD_USERS_LIST']),
+    ...mapActions('modal', ['toggleInVisible']),
+    loadUsersList () {
+      return new Promise(() => {
+        this.LOAD_USERS_LIST(this.GET_USER.avtkey)
+      })
+    },
+    pageClick (page) {
+      this.pageNumber = page
+    },
+    toggleModal () {
+      this.toggleInVisible()
+    }
+  },
+  computed: {
+    ...mapGetters('user', ['GET_USER']),
+    ...mapGetters('users', ['GET_USERS']),
+    ...mapGetters('modal', ['GET_INVISIBLE']),
+    pages () {
+      if (this.GET_USERS.length > 0) {
+        return Math.ceil(this.GET_USERS.length / +this.select)
+      }
+    },
+    paginatedUsers () {
+      if (this.GET_USERS) {
+        this.fromPageNumber = (this.pageNumber - 1) * +this.select
+        this.toPageNumber = this.fromPageNumber + +this.select
+        return this.GET_USERS.slice(this.fromPageNumber, this.toPageNumber).filter(users => users['1'].info.name.includes(this.search))
+      }
+    },
+    showModal () {
+      return this.GET_INVISIBLE
+    }
+  },
+  async mounted () {
+    await this.loadUsersList()
+  }
+}
+</script>

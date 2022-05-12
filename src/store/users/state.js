@@ -1,4 +1,4 @@
-/** @var { UsersState } */
+/** @const { UsersState } */
 const STATE = {
   users: null
 }

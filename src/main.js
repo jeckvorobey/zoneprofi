@@ -1,13 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
 import routes from './routes'
 import store from './store/index'
+import Paginate from 'vuejs-paginate'
+
+import 'bootstrap'
+import 'bs-custom-file-input'
+import 'admin-lte'
+import 'icheck'
 
 Vue.use(VueRouter)
-
 // Import top level component
 import App from './App.vue'
+
+Vue.component('Paginate', Paginate)
 
 // Routing logic
 const router = new VueRouter({
@@ -24,11 +30,18 @@ if (localStorage.getItem('avtkey')) {
     .then(() => {
       // Some middleware to help us ensure the user is authenticated.
       if (store.getters['user/GET_USER']) {
-        router.push({name: 'home'})
+        router.push('/')
       }
-    })
-    .catch(e => console.log(e))
+    }).catch(e => console.log(e))
 }
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.auth) && !store.getters['user/GET_USER']) {
+    next('/login')
+  } else {
+    next()
+  }
+})
 
 // Start out app!
 // eslint-disable-next-line no-new
@@ -38,7 +51,3 @@ new Vue({
   store,
   render: h => h(App)
 })
-
-require('bootstrap')
-require('admin-lte')
-require('../node_modules/admin-lte/dist/js/demo.js')

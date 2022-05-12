@@ -14,16 +14,20 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
-    "admin-lte": "^2.3.8",
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-regular-svg-icons": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/vue-fontawesome": "^2.0.6",
+    "admin-lte": "^3.2.0",
     "axios": "^0.26.1",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^4.6.1",
     "bootstrap-slider": "^9.5.3",
     "icheck": "^1.0.2",
     "ion-rangeslider": "^2.1.4",
     "jquery": "^3.1.1",
-    "vue": "^2.0.1",
-    "vue-router": "^2.0.2",
-    "vuex": "^2.0.0"
+    "vue": "^2.6.14",
+    "vue-router": "^3.0.0",
+    "vuex": "^3.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
@@ -79,6 +83,7 @@
     "url-loader": "^0.5.7",
     "vue-loader": "^9.4.0",
     "vue-style-loader": "^1.0.0",
+    "vuejs-paginate": "^2.1.0",
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.8.3",
     "webpack-hot-middleware": "^2.12.2",
