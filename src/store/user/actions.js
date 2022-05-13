@@ -3,9 +3,8 @@ import {REMOVE_USER, SET_USER} from './mutation-types'
 
 /**
  * @param { function } commit
- * @param { Object } authData
  */
-export async function authUser ({commit}, authData) {
+export async function authUser (commit) {
   await axios({
     method: 'post',
     url: 'https://api.zone.pro/key1781232884:AAEdjLso8u9maYpfRN1dR8CJPfI6QkXihao/avt/avt',

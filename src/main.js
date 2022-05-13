@@ -1,28 +1,17 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-import routes from './routes'
+import router from './router'
 import store from './store/index'
 import Paginate from 'vuejs-paginate'
 
-import 'bootstrap'
-import 'bs-custom-file-input'
-import 'admin-lte'
-import 'icheck'
+import 'bootstrap/dist/js/bootstrap.min'
+import 'bs-custom-file-input/dist/bs-custom-file-input.min'
+import 'admin-lte/dist/js/adminlte.min'
+import '@fortawesome/fontawesome-free/js/all.min'
 
-Vue.use(VueRouter)
 // Import top level component
 import App from './App.vue'
 
 Vue.component('Paginate', Paginate)
-
-// Routing logic
-const router = new VueRouter({
-  routes: routes,
-  mode: 'history',
-  scrollBehavior: function (to, from, savedPosition) {
-    return savedPosition || {x: 0, y: 0}
-  }
-})
 
 // Check local storage to handle refreshes
 if (localStorage.getItem('avtkey')) {

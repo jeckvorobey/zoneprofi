@@ -1,11 +1,4 @@
 <template>
-  <div class="login-page">
-    <div class="login-box">
-      <div class="login-logo">
-        <img class="img-size-64 img-circle" src="/static/img/logo/ZPlogo160x160.png" alt="logoZonePro">
-        <span><b>Zone</b>PRO</span>
-      </div>
-      <!-- /.login-logo -->
       <div class="card">
         <div class="card-body login-card-body">
           <div class="login-box-body">
@@ -46,8 +39,6 @@
         </div>
 
       </div>
-    </div>
-  </div>
 </template>
 
 <script>
