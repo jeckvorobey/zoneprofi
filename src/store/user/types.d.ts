@@ -1,3 +1,3 @@
 export interface UserState {
-    user: Object
+    user: Object;
 }

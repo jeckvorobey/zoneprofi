@@ -25,27 +25,24 @@
                   <div class="row">
                     <div class="col-md-6 col-sm-12">
                       <div class="dataTables_length">
-                        <label>Показывать по:
-                          <select class="custom-select-sm mx-2"
-                                  v-model="select">
-                            <option
-                              v-for="(select, index) in selects"
-                              :key="index"
-                            >{{ select }}
-                            </option>
-                          </select>записей
+                        <label
+                          >Показывать по:
+                          <select class="custom-select-sm mx-2" v-model="select">
+                            <option v-for="(select, index) in selects" :key="index">{{ select }}</option></select
+                          >записей
                         </label>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-6">
                       <div class="card-tools">
                         <div class="input-group input-group-sm">
-                          <input type="text"
-                                 name="table_search"
-                                 class="form-control float-right"
-                                 placeholder="Search"
-                                 v-model="search"
-                          >
+                          <input
+                            type="text"
+                            name="table_search"
+                            class="form-control float-right"
+                            placeholder="Search"
+                            v-model="search"
+                          />
                           <div class="input-group-append">
                             <button type="submit" class="btn btn-default">
                               <i class="fas fa-search"></i>
@@ -57,70 +54,59 @@
                   </div>
                   <div class="row">
                     <div class="col-sm-12">
-                      <table id="table_users"
-                             class="table table-responsive table-bordered table-striped table-hover dataTable table-head-fixed">
+                      <table
+                        id="table_users"
+                        class="table table-responsive table-bordered table-striped table-hover dataTable table-head-fixed"
+                      >
                         <thead class="text-nowrap">
-                        <tr>
-                          <th class="sorting">
-                            ID
-                          </th>
-                          <th class="sorting">
-                            Имя/Логин
-                          </th>
-                          <th class="sorting">
-                            Телеграм
-                          </th>
-                          <th class="sorting">
-                            Теги
-                          </th>
-                          <th class="sorting">
-                            Часы работы
-                          </th>
-                          <th class="sorting">
-                            Дополнительно
-                          </th>
-                        </tr>
+                          <tr>
+                            <th class="sorting">ID</th>
+                            <th class="sorting">Имя/Логин</th>
+                            <th class="sorting">Телеграм</th>
+                            <th class="sorting">Теги</th>
+                            <th class="sorting">Часы работы</th>
+                            <th class="sorting">Дополнительно</th>
+                          </tr>
                         </thead>
                         <tbody>
-                        <tr
-                          role="row"
-                          class="odd"
-                          :class="{ 'bg-orange': item['1'].info.moder === '0' }"
-                          v-for="(item) in paginatedUsers"
-                          :key="item.id"
-                        >
-                          <td class="sorting">{{ item['0'] }}</td>
-                          <td class="sorting">
-                          <a @click="toggleModal">
-                            {{ item['1'].info.name }}
-                            {{ item['1'].info.login !== '' ? ' / ' + item['1'].info.login : '' }}
-                            ({{ item['1'].info.balans }} &#8381;)
-                          </a>
-                          </td>
-                          <td class="sorting">@{{ item['1'].info.TGname }}</td>
-                          <td class="sorting">{{ item['1'].tags }}</td>
-                          <td class="sorting">{{ item['1'].work[Object.keys(item['1'].work)[0]] }}</td>
-                          <td class="sorting btn-group">
-                            <button class="btn btn-default">
-                              <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </button>
-                            <button class="btn btn-default">
-                              <i class="fa fa-ban" aria-hidden="true"></i>
-                            </button>
-                            <button class="btn btn-default">
-                              <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
-                          </td>
-                        </tr>
+                          <tr
+                            role="row"
+                            class="odd"
+                            :class="{ 'bg-orange': item['1'].info.moder === '0' }"
+                            v-for="item in paginatedUsers"
+                            :key="item.id"
+                          >
+                            <td class="sorting">{{ item["0"] }}</td>
+                            <td class="sorting">
+                              <a @click="toggleModal">
+                                {{ item["1"].info.name }}
+                                {{ item["1"].info.login !== "" ? " / " + item["1"].info.login : "" }}
+                                ({{ item["1"].info.balans }} &#8381;)
+                              </a>
+                            </td>
+                            <td class="sorting">@{{ item["1"].info.TGname }}</td>
+                            <td class="sorting">{{ item["1"].tags }}</td>
+                            <td class="sorting">{{ item["1"].work[Object.keys(item["1"].work)[0]] }}</td>
+                            <td class="sorting btn-group">
+                              <button class="btn btn-default">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                              </button>
+                              <button class="btn btn-default">
+                                <i class="fa fa-ban" aria-hidden="true"></i>
+                              </button>
+                              <button class="btn btn-default">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                              </button>
+                            </td>
+                          </tr>
                         </tbody>
                       </table>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-sm-12 col-md-5">
-                      <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Показано с
-                        {{ fromPageNumber + 1 }} по {{ toPageNumber }}
-                        из {{ GET_USERS.length }} записей
+                      <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
+                        Показано с {{ fromPageNumber + 1 }} по {{ toPageNumber }} из {{ GET_USERS.length }} записей
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-7">
@@ -195,61 +181,65 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex'
-import Modal from '../../components/Modal'
+import { mapActions, mapGetters } from "vuex";
+import Modal from "../../components/Modal";
 
 export default {
-  name: 'UsersIndex',
+  name: "UsersIndex",
   components: {
-    Modal
+    Modal,
   },
   data: function () {
     return {
-      search: '',
+      search: "",
       pageNumber: 1,
       fromPageNumber: null,
       toPageNumber: null,
       selects: [10, 25, 50, 100],
-      select: 10
-    }
+      select: 10,
+    };
   },
   methods: {
-    ...mapActions('users', ['LOAD_USERS_LIST']),
-    ...mapActions('modal', ['toggleInVisible']),
-    loadUsersList () {
-      return new Promise(() => {
-        this.LOAD_USERS_LIST(this.GET_USER.avtkey)
-      })
+    ...mapActions("users", ["LOAD_USERS_LIST"]),
+    ...mapActions("modal", ["toggleInVisible"]),
+    loadUsersList() {
+      this.LOAD_USERS_LIST(this.GET_USER.avtkey);
     },
-    pageClick (page) {
-      this.pageNumber = page
+    pageClick(page) {
+      this.pageNumber = page;
     },
-    toggleModal () {
-      this.toggleInVisible()
-    }
+    toggleModal() {
+      this.toggleInVisible();
+    },
   },
   computed: {
-    ...mapGetters('user', ['GET_USER']),
-    ...mapGetters('users', ['GET_USERS']),
-    ...mapGetters('modal', ['GET_INVISIBLE']),
-    pages () {
+    ...mapGetters("user", ["GET_USER"]),
+    ...mapGetters("users", ["GET_USERS"]),
+    ...mapGetters("modal", ["GET_INVISIBLE"]),
+    // eslint-disable-next-line vue/return-in-computed-property
+    pages() {
       if (this.GET_USERS.length > 0) {
-        return Math.ceil(this.GET_USERS.length / +this.select)
+        return Math.ceil(this.GET_USERS.length / +this.select);
       }
     },
-    paginatedUsers () {
+    // eslint-disable-next-line vue/return-in-computed-property
+    paginatedUsers() {
       if (this.GET_USERS) {
-        this.fromPageNumber = (this.pageNumber - 1) * +this.select
-        this.toPageNumber = this.fromPageNumber + +this.select
-        return this.GET_USERS.slice(this.fromPageNumber, this.toPageNumber).filter(users => users['1'].info.name.includes(this.search))
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        this.fromPageNumber = (this.pageNumber - 1) * +this.select;
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        this.toPageNumber = this.fromPageNumber + +this.select;
+        return this.GET_USERS.slice(this.fromPageNumber, this.toPageNumber).filter((users) =>
+          users["1"].info.name.includes(this.search)
+        );
       }
     },
-    showModal () {
-      return this.GET_INVISIBLE
-    }
+    showModal() {
+      return this.GET_INVISIBLE;
+    },
   },
-  async mounted () {
-    await this.loadUsersList()
-  }
-}
+  async mounted() {
+    await this.loadUsersList();
+  },
+};
 </script>

@@ -1,29 +1,28 @@
 <template>
   <div id="app">
     <component :is="layout">
-      <router-view/>
+      <router-view />
     </component>
   </div>
 </template>
 
 <script>
-import DashboardLayout from './layout/DashboardLayout'
-import LoginLayout from './layout/LoginLayout'
+import HomeLayout from "./layout/HomeLayout";
+import EmptyLayout from "./layout/EmptyLayout";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    DashboardLayout,
-    LoginLayout
+    HomeLayout,
+    EmptyLayout,
   },
   computed: {
-    layout () {
-      console.log(this.$route.meta)
-      return 'login-layout'
-    }
-  }
-}
+    layout() {
+      return (this.$route.meta.layout || "empty") + "-layout";
+    },
+  },
+};
 </script>
-<style>
-@import '~@fortawesome/fontawesome-free/css/all.min.css';
+<style lang="scss">
+@import "assets/style/styles";
 </style>
