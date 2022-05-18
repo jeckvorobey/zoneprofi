@@ -16,23 +16,17 @@ Vue.component("Paginate", Paginate);
 
 // Check local storage to handle refreshes
 if (localStorage.getItem("avtkey")) {
-  store
-    .dispatch("user/AUTH_KEY_USER", window.localStorage.getItem("avtkey"))
-    .then(() => {
-      // Some middleware to help us ensure the user is authenticated.
-      if (store.getters["user/GET_USER"]) {
-        router.push("/").then();
-      }
-    })
-    .catch((e) => console.log(e));
+  (async function () {
+    await store.dispatch("user/AUTH_KEY_USER", localStorage.getItem("avtkey"));
+    if (store.getters["user/GET_USER"]) {
+      await router.push("/");
+    }
+  })();
 }
 
 router.beforeEach((to, from, next) => {
-  if (
-    to.matched.some((record) => record.meta.auth) &&
-    !store.getters["user/GET_USER"]
-  ) {
-    next("/login");
+  if (to.matched.some((record) => record.meta.auth) && !store.getters["user/GET_USER"]) {
+    next({ name: "login" });
   } else {
     next();
   }

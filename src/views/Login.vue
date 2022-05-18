@@ -59,10 +59,9 @@ export default {
   },
   methods: {
     ...mapActions("user", ["authUser"]),
-    userAuth() {
-      console.log(`form ${JSON.stringify(this.form)}`);
+    async userAuth() {
       if (this.form.credentials.pas !== "" && this.form.credentials.login !== "") {
-        this.authUser(this.form)
+        await this.authUser(this.form)
           .then(() => {
             this.$router.push({ name: "dashboard" });
           })
