@@ -77,8 +77,8 @@
                             :key="item.id"
                           >
                             <td class="sorting">{{ item["0"] }}</td>
-                            <td class="sorting">
-                              <a @click="toggleModal">
+                            <td class="sorting" @click="showModal(item['0'])">
+                              <a>
                                 {{ item["1"].info.name }}
                                 {{ item["1"].info.login !== "" ? " / " + item["1"].info.login : "" }}
                                 ({{ item["1"].info.balans }} &#8381;)
@@ -89,7 +89,7 @@
                             <td class="sorting">{{ item["1"].work[Object.keys(item["1"].work)[0]] }}</td>
                             <td class="sorting btn-group">
                               <button class="btn btn-default">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                <i class="fa fa-pen" aria-hidden="true"></i>
                               </button>
                               <button class="btn btn-default">
                                 <i class="fa fa-ban" aria-hidden="true"></i>
@@ -106,7 +106,7 @@
                   <div class="row">
                     <div class="col-sm-12 col-md-5">
                       <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
-                        Показано с {{ fromPageNumber + 1 }} по {{ toPageNumber }} из {{ GET_USERS.length }} записей
+                        Показано с {{ fromPageNumber + 1 }} по {{ toPageNumber }} из {{ this.GET_USERS.length }} записей
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-7">
@@ -125,47 +125,8 @@
                           :next-class="'paginate_button page-item next'"
                         >
                         </paginate>
-                        <!--                        <ul class="pagination">-->
-                        <!--                          <li class="paginate_button page-item previous disabled">-->
-                        <!--                            <a href="#" aria-controls="table_users" data-dt-idx="0" tabindex="0" class="page-link">-->
-                        <!--                              Previous-->
-                        <!--                            </a>-->
-                        <!--                          </li>-->
-                        <!--                          <li class="paginate_button page-item"-->
-                        <!--                              :class="{'active': page === pageNumber}"-->
-                        <!--                              v-for="page in pages"-->
-                        <!--                              :key="page.id"-->
-                        <!--                          >-->
-                        <!--                            <a href="#" aria-controls="table_users" class="page-link" @click.prevent="pageClick(page)">{{-->
-                        <!--                                page-->
-                        <!--                              }}</a>-->
-                        <!--                          </li>-->
-                        <!--                          <li class=" paginate_button page-item next"-->
-                        <!--                              id="example2_next">-->
-                        <!--                            <a href="#"-->
-                        <!--                               aria-controls="table_users"-->
-                        <!--                               tabindex="0"-->
-                        <!--                               class="page-link">Next-->
-                        <!--                            </a>-->
-                        <!--                          </li>-->
-                        <!--                        </ul>-->
                       </div>
                     </div>
-                    <!--                    <div class="col-sm-12 col-md-7">-->
-                    <!--                      <div class="container-fluid">-->
-                    <!--                        <nav class="dataTables_paginate paging_simple_numbers">-->
-                    <!--                          <ul class="pagination">-->
-                    <!--                            <li class="paginate_button"-->
-                    <!--                                :class="{'active': page === pageNumber}"-->
-                    <!--                                v-for="page in pages"-->
-                    <!--                                :key="page.id"-->
-                    <!--                            >-->
-                    <!--                              <span @click="pageClick(page)">{{ page }}</span>-->
-                    <!--                            </li>-->
-                    <!--                          </ul>-->
-                    <!--                        </nav>-->
-                    <!--                      </div>-->
-                    <!--                    </div>-->
                   </div>
                 </div>
               </div>
@@ -175,20 +136,19 @@
       </div>
       <h1></h1>
     </section>
-    <modal v-if="showModal"></modal>
+    <modal name="userInfo">
+      <Form />
+    </modal>
   </div>
   <!--  end content-wrapper -->
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import Modal from "../../components/Modal";
+import Form from "../users/Form";
 
 export default {
   name: "UsersIndex",
-  components: {
-    Modal,
-  },
   data: function () {
     return {
       search: "",
@@ -199,23 +159,24 @@ export default {
       select: 10,
     };
   },
+  components: {
+    Form,
+  },
   methods: {
     ...mapActions("users", ["LOAD_USERS_LIST"]),
-    ...mapActions("modal", ["toggleInVisible"]),
     loadUsersList() {
       this.LOAD_USERS_LIST(this.GET_USER.avtkey);
     },
     pageClick(page) {
       this.pageNumber = page;
     },
-    toggleModal() {
-      this.toggleInVisible();
+    showModal(idUser) {
+      this.$modal.show(Form, { idUser });
     },
   },
   computed: {
     ...mapGetters("user", ["GET_USER"]),
     ...mapGetters("users", ["GET_USERS"]),
-    ...mapGetters("modal", ["GET_INVISIBLE"]),
     // eslint-disable-next-line vue/return-in-computed-property
     pages() {
       if (this.GET_USERS.length > 0) {
@@ -233,9 +194,6 @@ export default {
           users["1"].info.name.includes(this.search)
         );
       }
-    },
-    showModal() {
-      return this.GET_INVISIBLE;
     },
   },
   async mounted() {

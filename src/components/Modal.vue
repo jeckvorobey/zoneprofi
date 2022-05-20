@@ -1,36 +1,37 @@
 <template>
-  <div class="example-modal">
-    <div class="modal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Default Modal</h4>
-          </div>
-          <div class="modal-body">
-            <slot/>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+  <!-- Модальное окно -->
+  <div
+    class="modal fade show"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-modal="true"
+    role="dialog"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Заголовок модального окна</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <!-- /.modal-content -->
+        <div class="modal-body">...</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+          <button type="button" class="btn btn-primary">Сохранить изменения</button>
+        </div>
       </div>
-      <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal -->
   </div>
-  <!-- /.example-modal -->
 </template>
 
 <script>
 export default {
-  name: 'Modal',
+  name: "Modal",
   data: function () {
-    return {}
+    return {};
   },
-  computed: {}
-}
+  computed: {},
+};
 </script>

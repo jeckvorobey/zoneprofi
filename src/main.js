@@ -2,6 +2,7 @@ import Vue from "vue";
 import router from "./router";
 import store from "./store/index";
 import Paginate from "vuejs-paginate";
+import VueJSModal from "vue-js-modal";
 
 import "@fortawesome/fontawesome-free/js/all.min";
 import "bootstrap/dist/js/bootstrap.min";
@@ -11,6 +12,10 @@ import "admin-lte/dist/js/adminlte.min";
 
 // Import top level component
 import App from "./App.vue";
+Vue.use(VueJSModal, {
+  dialog: true,
+  dynamicDefaults: { adaptive: true, resizable: true },
+});
 
 Vue.component("Paginate", Paginate);
 
@@ -25,7 +30,7 @@ if (localStorage.getItem("avtkey")) {
 }
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some((record) => record.meta.auth) && !store.getters["user/GET_USER"]) {
+  if (to.matched.some((record) => record.meta.auth) && Object.keys(store.getters["user/GET_USER"]).length === 0) {
     next({ name: "login" });
   } else {
     next();
@@ -33,7 +38,6 @@ router.beforeEach((to, from, next) => {
 });
 
 // Start out app!
-// eslint-disable-next-line no-new
 new Vue({
   el: "#app",
   router,

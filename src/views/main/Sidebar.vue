@@ -18,8 +18,8 @@
           />
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ username }}</a>
-          <span class="text-green">{{ role }}</span>
+          <a href="#" class="d-block">{{ GET_USER.username }}</a>
+          <span class="text-green">{{ GET_USER.role }}</span>
         </div>
         <button class="btn btn-dark" @click.prevent="logout()">
           <i class="fa fa-sign-out-alt"></i>
@@ -101,16 +101,6 @@ export default {
   },
   computed: {
     ...mapGetters("user", ["GET_USER"]),
-    // eslint-disable-next-line vue/return-in-computed-property
-    getUsernameAndRole() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.username = this.GET_USER.username;
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.role = this.GET_USER.role;
-    },
-  },
-  mounted() {
-    this.getUsernameAndRole();
   },
 };
 </script>

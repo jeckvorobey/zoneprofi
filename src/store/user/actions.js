@@ -45,7 +45,6 @@ export async function AUTH_KEY_USER({ commit }, avtkey) {
       if (r.status === 200 && r.data.code === "200") {
         // eslint-disable-next-line no-prototype-builtins
         if (r.data.res.hasOwnProperty("avtkey")) {
-          // console.log('USER (Action AUTH_KEY_USER) >>> \n' + JSON.stringify(r.data.res))
           commit(SET_USER, r.data.res);
         } else {
           console.log("Not auth messages: " + r.data.res);
