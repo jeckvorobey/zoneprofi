@@ -32,7 +32,7 @@ export async function authUser({ commit }, authData) {
  * @param { function } commit
  * @param { string } avtkey
  */
-export async function AUTH_KEY_USER({ commit }, avtkey) {
+export async function authKeyUser({ commit }, avtkey) {
   await axios({
     method: "post",
     url: "https://api.zone.pro/key1781232884:AAEdjLso8u9maYpfRN1dR8CJPfI6QkXihao/avt/avtkey",

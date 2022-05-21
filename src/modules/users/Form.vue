@@ -2,7 +2,7 @@
   <form>
     <div class="form-header">
       <h1>
-        Id user<span>  {{ idUser }}</span>
+        Id user<span> {{ idUser }}</span>
       </h1>
     </div>
   </form>
@@ -17,7 +17,6 @@ export default {
       required: true,
     },
   },
-  mounted() {
-  },
+  mounted() {},
 };
 </script>

@@ -106,7 +106,7 @@
                   <div class="row">
                     <div class="col-sm-12 col-md-5">
                       <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
-                        Показано с {{ fromPageNumber + 1 }} по {{ toPageNumber }} из {{ this.GET_USERS.length }} записей
+                        Показано с {{ fromPageNumber + 1 }} по {{ toPageNumber }} из {{ count }} записей
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-7">
@@ -163,9 +163,14 @@ export default {
     Form,
   },
   methods: {
-    ...mapActions("users", ["LOAD_USERS_LIST"]),
-    loadUsersList() {
-      this.LOAD_USERS_LIST(this.GET_USER.avtkey);
+    ...mapActions("users", ["loadUserList"]),
+    async loadUsersList() {
+      try {
+        await this.loadUserList(this.GET_USER.avtkey);
+      } catch (e) {
+        console.log(e);
+        throw e;
+      }
     },
     pageClick(page) {
       this.pageNumber = page;
@@ -179,9 +184,16 @@ export default {
     ...mapGetters("users", ["GET_USERS"]),
     // eslint-disable-next-line vue/return-in-computed-property
     pages() {
-      if (this.GET_USERS.length > 0) {
-        return Math.ceil(this.GET_USERS.length / +this.select);
+      if (this.GET_USERS) {
+        return +Math.ceil(Object.keys(this.GET_USERS).length / +this.select);
       }
+      return 0;
+    },
+    count() {
+      if (this.GET_USERS) {
+        return Object.keys(this.GET_USERS).length;
+      }
+      return null;
     },
     // eslint-disable-next-line vue/return-in-computed-property
     paginatedUsers() {
@@ -190,9 +202,9 @@ export default {
         this.fromPageNumber = (this.pageNumber - 1) * +this.select;
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         this.toPageNumber = this.fromPageNumber + +this.select;
-        return this.GET_USERS.slice(this.fromPageNumber, this.toPageNumber).filter((users) =>
-          users["1"].info.name.includes(this.search)
-        );
+        return Object.entries(this.GET_USERS)
+          .slice(this.fromPageNumber, this.toPageNumber)
+          .filter((users) => users["1"].info.name.includes(this.search));
       }
     },
   },

@@ -21,12 +21,17 @@ Vue.component("Paginate", Paginate);
 
 // Check local storage to handle refreshes
 if (localStorage.getItem("avtkey")) {
-  (async function () {
-    await store.dispatch("user/AUTH_KEY_USER", localStorage.getItem("avtkey"));
-    if (store.getters["user/GET_USER"]) {
-      await router.push("/");
-    }
-  })();
+  // eslint-disable-next-line no-useless-catch
+  try {
+    (async function () {
+      await store.dispatch("user/authKeyUser", localStorage.getItem("avtkey"));
+      if (store.getters["user/GET_USER"]) {
+        await router.push("/");
+      }
+    })();
+  } catch (e) {
+    throw e;
+  }
 }
 
 router.beforeEach((to, from, next) => {

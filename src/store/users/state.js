@@ -1,6 +1,6 @@
 /** @const { UsersState } */
 const STATE = {
-  users: null
-}
+  users: null,
+};
 
-export default STATE
+export default STATE;
