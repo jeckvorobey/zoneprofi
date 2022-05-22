@@ -13,8 +13,11 @@ import "admin-lte/dist/js/adminlte.min";
 // Import top level component
 import App from "./App.vue";
 Vue.use(VueJSModal, {
-  dialog: true,
-  dynamicDefaults: { adaptive: true, resizable: true },
+  dynamicDefaults: {
+    draggable: true,
+    resizable: true,
+    height: "auto",
+  },
 });
 
 Vue.component("Paginate", Paginate);
