@@ -41,16 +41,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr role="row" v-for="tag in paginatedTags" :key="tag.id" class="">
+        <tr role="row" v-for="tag in paginatedTags" :key="tag.id">
           <td>{{ tag.id }}</td>
-          <td>{{ tag.name }}</td>
-          <td class="btn-group">
-            <button class="btn btn-default">
-              <i class="fa fa-pen" aria-hidden="true"></i>
-            </button>
-            <button class="btn btn-default">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-            </button>
+          <td class="w-100">{{ tag.name }}</td>
+          <td>
+            <div class="btn-group d-flex justify-content-center">
+              <button class="btn btn-default">
+                <i class="fa fa-pen" aria-hidden="true"></i>
+              </button>
+              <button class="btn btn-default">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+            </div>
           </td>
         </tr>
       </tbody>
