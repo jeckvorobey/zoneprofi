@@ -6,9 +6,14 @@ import axios from "axios";
  * @param { function } commit
  */
 export async function loadTags({ commit }) {
-  const res = await axios({
+  await axios({
     method: "get",
     url: "https://api.zone.pro/key1781232884:AAEdjLso8u9maYpfRN1dR8CJPfI6QkXihao/tags/getall",
-  });
-  commit(SET_TAGS, { res });
+  })
+    .then((r) => {
+      if (r.data.code === "200") {
+        commit(SET_TAGS, { ...r.data.res });
+      }
+    })
+    .catch((error) => console.log(error));
 }

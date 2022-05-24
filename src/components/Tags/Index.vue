@@ -17,19 +17,19 @@
 <script>
 import { mapActions } from "vuex";
 export default {
-  name: "TagsIndex",
+  name: "index",
   methods: {
     ...mapActions("tags", ["loadTags"]),
-    async loadTags() {
+    async loadTagsList() {
       try {
-        await this.loadTags;
+        await this.loadTags();
       } catch (e) {
         console.log(`ERR loadrtags >>> ${e}`);
       }
     },
   },
   async mounted() {
-    return await this.loadTags();
+    await this.loadTagsList();
   },
 };
 </script>

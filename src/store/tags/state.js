@@ -1,4 +1,4 @@
-/** @var { TagsState } */
+/** @const { TagsState } */
 const STATE = {
   tags: null,
 };

@@ -137,7 +137,7 @@
       <h1></h1>
     </section>
     <modal name="userInfo">
-      <Form />
+      <Form id-user="" />
     </modal>
   </div>
   <!--  end content-wrapper -->
@@ -145,7 +145,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import Form from "../users/Form";
+import Form from "./Form";
 
 export default {
   name: "UsersIndex",
