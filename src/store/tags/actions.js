@@ -12,7 +12,7 @@ export async function loadTags({ commit }) {
   })
     .then((r) => {
       if (r.data.code === "200") {
-        commit(SET_TAGS, { ...r.data.res });
+        commit(SET_TAGS, r.data.res);
       }
     })
     .catch((error) => console.log(error));

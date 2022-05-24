@@ -1,45 +1,47 @@
 <template>
   <div class="row">
-    <div class="row">
-      <div class="col-md-6 col-sm-12">
-        <div class="dataTables_length">
-          <label
-            >Показывать по:
-            <select class="custom-select-sm mx-2" v-model="select">
-              <option v-for="(select, index) in selects" :key="index">{{ select }}</option></select
-            >записей
-          </label>
+    <div class="col">
+      <div class="row mt-3">
+        <div class="col-md-6 col-sm-12">
+          <div class="dataTables_length">
+            <label
+              >Показывать по:
+              <select class="custom-select-sm mx-2" v-model="select">
+                <option v-for="(select, index) in selects" :key="index">{{ select }}</option></select
+              >записей
+            </label>
+          </div>
         </div>
-      </div>
-      <div class="col-sm-12 col-md-6">
-        <div class="card-tools">
-          <div class="input-group input-group-sm">
-            <input
-              type="text"
-              name="table_search"
-              class="form-control float-right"
-              placeholder="Search"
-              v-model="search"
-            />
-            <div class="input-group-append">
-              <button type="submit" class="btn btn-default">
-                <i class="fas fa-search"></i>
-              </button>
+        <div class="col-sm-12 col-md-6">
+          <div class="card-tools">
+            <div class="input-group input-group-sm">
+              <input
+                type="text"
+                name="table_search"
+                class="form-control float-right"
+                placeholder="Search"
+                v-model="search"
+              />
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-default">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <table id="tagsTable" class="table table-hover table-bordered table-responsive">
+    <table id="tagsTable" class="table table-hover table-bordered">
       <thead>
-        <tr>
+        <tr role="row">
           <th>ID</th>
           <th>Название</th>
           <th>Дополнительно</th>
         </tr>
       </thead>
       <tbody>
-        <tr role="row" v-for="tag in paginatedTags" :key="tag.id">
+        <tr role="row" v-for="tag in paginatedTags" :key="tag.id" class="">
           <td>{{ tag.id }}</td>
           <td>{{ tag.name }}</td>
           <td class="btn-group">
@@ -108,13 +110,13 @@ export default {
     },
     pages() {
       if (this.getTags) {
-        return +Math.ceil(Object.keys(this.getTags).length / +this.select);
+        return +Math.ceil(this.getTags.length / +this.select);
       }
       return 0;
     },
     count() {
       if (this.getTags) {
-        return Object.keys(this.getTags).length;
+        return this.getTags.length;
       }
       return null;
     },
@@ -125,8 +127,9 @@ export default {
         this.fromPageNumber = (this.pageNumber - 1) * +this.select;
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         this.toPageNumber = this.fromPageNumber + +this.select;
-        return Object.entries(this.getTags).slice(this.fromPageNumber, this.toPageNumber);
-        // .filter((tags) => tags["1"].name.includes(this.search));
+        return this.getTags
+          .slice(this.fromPageNumber, this.toPageNumber)
+          .filter((tags) => tags.name.includes(this.search));
       }
     },
   },

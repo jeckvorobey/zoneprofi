@@ -1,3 +1,3 @@
 export interface TagsState {
-    tags: Object;
+    tags: Array<null>;
 }

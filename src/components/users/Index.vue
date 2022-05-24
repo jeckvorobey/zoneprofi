@@ -54,10 +54,7 @@
                   </div>
                   <div class="row">
                     <div class="col-sm-12">
-                      <table
-                        id="table_users"
-                        class="table table-responsive table-bordered table-striped table-hover table-head-fixed"
-                      >
+                      <table id="table_users" class="table table-bordered table-striped table-hover table-head-fixed">
                         <thead class="text-nowrap">
                           <tr>
                             <th class="sorting">ID</th>
