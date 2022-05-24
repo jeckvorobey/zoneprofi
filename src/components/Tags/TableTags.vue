@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col">
-      <div class="row mt-3">
+      <div class="row mt-3 px-2">
         <div class="col-md-6 col-sm-12">
           <div class="dataTables_length">
             <label
@@ -42,7 +42,7 @@
       </thead>
       <tbody>
         <tr role="row" v-for="tag in paginatedTags" :key="tag.id">
-          <td>{{ tag.id }}</td>
+          <td class="text-center">{{ tag.id }}</td>
           <td class="w-100">{{ tag.name }}</td>
           <td>
             <div class="btn-group d-flex justify-content-center">
@@ -57,28 +57,30 @@
         </tr>
       </tbody>
     </table>
-    <div class="row">
-      <div class="col-sm-12 col-md-5">
-        <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
-          Показано с {{ fromPageNumber + 1 }} по {{ toPageNumber }} из {{ count }} записей
+    <div class="col">
+      <div class="row px-2">
+        <div class="col-sm-12 col-md-5">
+          <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
+            Показано с {{ fromPageNumber + 1 }} по {{ toPageNumber }} из {{ count }} записей
+          </div>
         </div>
-      </div>
-      <div class="col-sm-12 col-md-7">
-        <div class="dataTables_paginate paging_simple_numbers">
-          <paginate
-            :page-count="pages"
-            :click-handler="pageClick"
-            :prev-text="'Назад'"
-            :next-text="'Вперед'"
-            :container-class="'pagination'"
-            :page-class="'paginate_button page-item'"
-            :page-link-class="'page-link'"
-            :prev-class="'paginate_button page-item previous'"
-            :prev-link-class="'page-link'"
-            :next-link-class="'page-link'"
-            :next-class="'paginate_button page-item next'"
-          >
-          </paginate>
+        <div class="col-sm-12 col-md-7 d-flex justify-content-end">
+          <div class="dataTables_paginate paging_simple_numbers">
+            <paginate
+              :page-count="pages"
+              :click-handler="pageClick"
+              :prev-text="'Назад'"
+              :next-text="'Вперед'"
+              :container-class="'pagination'"
+              :page-class="'paginate_button page-item'"
+              :page-link-class="'page-link'"
+              :prev-class="'paginate_button page-item previous'"
+              :prev-link-class="'page-link'"
+              :next-link-class="'page-link'"
+              :next-class="'paginate_button page-item next'"
+            >
+            </paginate>
+          </div>
         </div>
       </div>
     </div>
