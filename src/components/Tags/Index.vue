@@ -6,7 +6,9 @@
       <!-- Main content -->
       <section class="content">
         <!-- Default box -->
-        <div class="box"></div>
+        <div class="card">
+          <TableTags></TableTags>
+        </div>
         <!-- /.box -->
       </section>
       <!-- /.content -->
@@ -16,8 +18,13 @@
 
 <script>
 import { mapActions } from "vuex";
+import TableTags from "@/components/Tags/TableTags";
+
 export default {
   name: "index",
+  components: {
+    TableTags,
+  },
   methods: {
     ...mapActions("tags", ["loadTags"]),
     async loadTagsList() {

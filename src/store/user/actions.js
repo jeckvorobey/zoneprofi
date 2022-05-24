@@ -8,7 +8,7 @@ import { REMOVE_USER, SET_USER } from "./mutation-types";
 export async function authUser({ commit }, authData) {
   await axios({
     method: "post",
-    url: "https://api.zone.pro/key1781232884:AAEdjLso8u9maYpfRN1dR8CJPfI6QkXihao/avt/avt",
+    url: "https://api.0zo.ru/key1781232884:AAEdjLso8u9maYpfRN1dR8CJPfI6QkXihao/avt/avt",
     data: JSON.stringify(authData.credentials),
   })
     .then((r) => {
@@ -35,7 +35,7 @@ export async function authUser({ commit }, authData) {
 export async function authKeyUser({ commit }, avtkey) {
   await axios({
     method: "post",
-    url: "https://api.zone.pro/key1781232884:AAEdjLso8u9maYpfRN1dR8CJPfI6QkXihao/avt/avtkey",
+    url: "https://api.0zo.ru/key1781232884:AAEdjLso8u9maYpfRN1dR8CJPfI6QkXihao/avt/avtkey",
     data: JSON.stringify({
       key: avtkey,
     }),

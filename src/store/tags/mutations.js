@@ -7,7 +7,6 @@ export default {
    * @param { Object } tags
    */
   [SET_TAGS](state, tags) {
-    console.log(`mutation tags ${tags}`);
     state.tags = tags;
   },
 };

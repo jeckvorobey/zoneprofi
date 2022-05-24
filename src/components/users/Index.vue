@@ -56,7 +56,7 @@
                     <div class="col-sm-12">
                       <table
                         id="table_users"
-                        class="table table-responsive table-bordered table-striped table-hover dataTable table-head-fixed"
+                        class="table table-responsive table-bordered table-striped table-hover table-head-fixed"
                       >
                         <thead class="text-nowrap">
                           <tr>
@@ -134,10 +134,9 @@
           </div>
         </div>
       </div>
-      <h1></h1>
     </section>
     <modal name="userInfo">
-      <Form id-user="" />
+      <!--      <Form id-user="" />-->
     </modal>
   </div>
   <!--  end content-wrapper -->
@@ -159,9 +158,9 @@ export default {
       select: 10,
     };
   },
-  components: {
-    Form,
-  },
+  // components: {
+  //   Form,
+  // },
   methods: {
     ...mapActions("users", ["loadUserList"]),
     async loadUsersList() {
