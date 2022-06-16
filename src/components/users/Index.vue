@@ -14,7 +14,8 @@
     <!-- end content-header-->
     <section class="content">
       <div class="container-fluid">
-        <div class="row">
+        <Loader v-if="loading" />
+        <div v-else class="row">
           <div class="col-12">
             <div class="card">
               <!--              <div class="card-header">-->
@@ -153,6 +154,7 @@ export default {
       toPageNumber: null,
       selects: [10, 25, 50, 100],
       select: 10,
+      loading: false,
     };
   },
   // components: {
@@ -205,7 +207,9 @@ export default {
     },
   },
   async mounted() {
+    this.loading = true;
     await this.loadUsersList();
+    this.loading = false;
   },
 };
 </script>

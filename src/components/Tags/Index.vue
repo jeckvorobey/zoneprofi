@@ -5,9 +5,10 @@
       <h1>Теги</h1>
       <!-- Main content -->
       <section class="content">
+        <Loader v-if="loading" />
         <!-- Default box -->
-        <div class="card">
-          <TableTags></TableTags>
+        <div v-else class="card">
+          <TableTags />
         </div>
         <!-- /.box -->
       </section>
@@ -22,6 +23,11 @@ import TableTags from "@/components/Tags/TableTags";
 
 export default {
   name: "index",
+  data: function () {
+    return {
+      loading: false,
+    };
+  },
   components: {
     TableTags,
   },
@@ -36,7 +42,9 @@ export default {
     },
   },
   async mounted() {
+    this.loading = true;
     await this.loadTagsList();
+    this.loading = false;
   },
 };
 </script>

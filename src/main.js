@@ -3,6 +3,7 @@ import router from "./router";
 import store from "./store/index";
 import Paginate from "vuejs-paginate";
 import VueJSModal from "vue-js-modal";
+import Loader from "./components/Loader";
 
 import "@fortawesome/fontawesome-free/js/all.min";
 import "bootstrap/dist/js/bootstrap.min";
@@ -21,6 +22,7 @@ Vue.use(VueJSModal, {
 });
 
 Vue.component("Paginate", Paginate);
+Vue.component("Loader", Loader);
 
 // Check local storage to handle refreshes
 if (localStorage.getItem("avtkey")) {
