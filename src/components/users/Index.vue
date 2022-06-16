@@ -154,7 +154,7 @@ export default {
       toPageNumber: null,
       selects: [10, 25, 50, 100],
       select: 10,
-      loading: false,
+      loading: true,
     };
   },
   // components: {
@@ -207,7 +207,6 @@ export default {
     },
   },
   async mounted() {
-    this.loading = true;
     await this.loadUsersList();
     this.loading = false;
   },

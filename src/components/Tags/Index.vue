@@ -25,7 +25,7 @@ export default {
   name: "index",
   data: function () {
     return {
-      loading: false,
+      loading: true,
     };
   },
   components: {
@@ -42,7 +42,6 @@ export default {
     },
   },
   async mounted() {
-    this.loading = true;
     await this.loadTagsList();
     this.loading = false;
   },
