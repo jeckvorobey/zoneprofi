@@ -83,7 +83,7 @@
                               </a>
                             </td>
                             <td class="sorting">@{{ item["1"].info.TGname }}</td>
-                            <td class="sorting">{{ item["1"].tags }}</td>
+                            <td class="sorting">{{ Object.values(item["1"].tags).join(", ") }}</td>
                             <td class="sorting">{{ item["1"].work[Object.keys(item["1"].work)[0]] }}</td>
                             <td class="sorting btn-group">
                               <button class="btn btn-default">
