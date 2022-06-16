@@ -1,6 +1,6 @@
-/** @const { UserState } */
+/** @const { TagsState } */
 const STATE = {
-  user: {},
+  tags: null,
 };
 
 export default STATE;
