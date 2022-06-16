@@ -137,8 +137,6 @@ export default {
       }
     },
   },
-  async mounted() {
-    await console.log(this.paginatedTags);
-  },
+  async mounted() {},
 };
 </script>

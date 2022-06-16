@@ -41,7 +41,7 @@ export async function authKeyUser({ commit }, avtkey) {
     }),
   })
     .then((r) => {
-      //  console.log('USER (Action AUTH_KEY_USER) >>> 0\n' + JSON.stringify(r))
+      //console.log("USER (Action AUTH_KEY_USER) >>> 0\n" + JSON.stringify(r));
       if (r.status === 200 && r.data.code === "200") {
         // eslint-disable-next-line no-prototype-builtins
         if (r.data.res.hasOwnProperty("avtkey")) {
