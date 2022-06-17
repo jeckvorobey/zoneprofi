@@ -8,7 +8,7 @@ import axios from "axios";
 export async function loadTags({ commit }) {
   await axios({
     method: "get",
-    url: `https://api.0zo.ru/key${process.env.VUE_APP_APIKEY}/tags/getall`,
+    url: `https://api.0zo.ru/${process.env.VUE_APP_APIKEY}/tags/getall`,
   })
     .then((r) => {
       if (r.data.code === "200") {

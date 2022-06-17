@@ -1,10 +1,15 @@
 import Vue from "vue";
-import router from "./router";
-import store from "./store/index";
+import router from "@/router";
+import store from "@/store/index";
 import Paginate from "vuejs-paginate";
 import VueJSModal from "vue-js-modal";
-import Loader from "./components/Loader";
+import Loader from "@/components/Loader";
 
+//Плагины
+import ApiPlugin from "@/plugin/api";
+import LoadPlugin from "@/plugin/load";
+
+//внешние компоненты
 import "@fortawesome/fontawesome-free/js/all.min";
 import "bootstrap/dist/js/bootstrap.min";
 import "bootstrap/dist/js/bootstrap.bundle.min";
@@ -20,6 +25,8 @@ Vue.use(VueJSModal, {
     height: "auto",
   },
 });
+Vue.use(ApiPlugin);
+Vue.use(LoadPlugin);
 
 Vue.component("Paginate", Paginate);
 Vue.component("Loader", Loader);
