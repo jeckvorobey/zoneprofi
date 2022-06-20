@@ -1,6 +1,6 @@
 /** @const { UserState } */
 const STATE = {
-  user: null,
+  user: {},
 };
 
 export default STATE;

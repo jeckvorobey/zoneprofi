@@ -43,7 +43,7 @@
       <tbody>
         <tr role="row" v-for="tag in paginatedTags" :key="tag.id">
           <td class="text-center">{{ tag.id }}</td>
-          <td class="w-100">{{ tag.name }}</td>
+          <td class="w-100">{{ tag.title }}</td>
           <td>
             <div class="btn-group d-flex justify-content-center">
               <button class="btn btn-default">

@@ -58,16 +58,22 @@
           </li>
           <li class="nav-item dropdown-submenu">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-tools"></i>
-              <p>Разработка</p>
+              <i class="fa fa-tags nav-icon"></i>
+              <p>Теги</p>
               <i class="right fas fa-angle-left"></i>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <router-link :to="{ name: 'tags' }" class="nav-link">
-                  <i class="fa fa-tags nav-icon"></i>
-                  <p>Теги</p>
+                  <i class="nav-icon fa fa-tools"></i>
+                  <p>Разработка сайтов</p>
                 </router-link>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fa fa-plus"></i>
+                  <span>Добавить</span>
+                </a>
               </li>
             </ul>
           </li>

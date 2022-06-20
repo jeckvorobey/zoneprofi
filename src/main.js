@@ -38,16 +38,16 @@ if (localStorage.getItem("avtkey")) {
     (async function () {
       await store.dispatch("user/authKeyUser", localStorage.getItem("avtkey"));
       if (store.getters["user/GET_USER"]) {
-        await router.push("/");
+        await router.push("/").catch((e) => console.log(`router >>> ${e}`));
       }
     })();
   } catch (e) {
-    throw e;
+    console.log(`main avtkey >>> ${e}`);
   }
 }
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some((record) => record.meta.auth) && Object.keys(store.getters["user/GET_USER"]).length === 0) {
+  if (to.matched.some((record) => record.meta.auth) && Object.keys(store.getters["user/GET_USER"]) === null) {
     next({ name: "login" });
   } else {
     next();
