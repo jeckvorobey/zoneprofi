@@ -133,7 +133,7 @@ export default {
         this.toPageNumber = this.fromPageNumber + +this.select;
         return this.getTags
           .slice(this.fromPageNumber, this.toPageNumber)
-          .filter((tags) => tags.name.includes(this.search));
+          .filter((tags) => tags.title.includes(this.search));
       }
     },
   },

@@ -38,7 +38,7 @@ if (localStorage.getItem("avtkey")) {
     (async function () {
       await store.dispatch("user/authKeyUser", localStorage.getItem("avtkey"));
       if (store.getters["user/GET_USER"]) {
-        await router.push("/").catch((e) => console.log(`router >>> ${e}`));
+        await router.push({ name: "dashboard" }).catch((e) => console.log(`router >>> ${e}`));
       }
     })();
   } catch (e) {

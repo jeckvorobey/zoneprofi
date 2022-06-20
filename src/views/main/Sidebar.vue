@@ -59,18 +59,21 @@
           <li class="nav-item dropdown-submenu">
             <a href="#" class="nav-link">
               <i class="fa fa-tags nav-icon"></i>
-              <p>Теги</p>
+              <span>Теги</span>
               <i class="right fas fa-angle-left"></i>
             </a>
-            <ul class="nav nav-treeview">
+            <!--  показываем закрзчик пока получем данные с сервера-->
+            <loader v-if="loading" />
+            <!-- показываем категории как данные с сервера загрузились-->
+            <ul class="nav nav-treeview" v-else>
               <li class="nav-item">
                 <router-link :to="{ name: 'tags' }" class="nav-link">
-                  <i class="nav-icon fa fa-tools"></i>
-                  <p>Разработка сайтов</p>
+                  <i class="nav-icon far fa-circle"></i>
+                  <span>{{ this.getCategory.title }}</span>
                 </router-link>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link" @click.prevent="showModal">
                   <i class="nav-icon fa fa-plus"></i>
                   <span>Добавить</span>
                 </a>
@@ -94,19 +97,35 @@ export default {
     return {
       username: "",
       role: "",
+      loading: true,
     };
   },
   methods: {
     ...mapActions("user", ["logAut"]),
+    ...mapActions("tags", ["loadCategory"]),
+    async loadCategoryList() {
+      await this.loadCategory();
+    },
     logout() {
       this.logAut();
       if (!this.GET_USER && !localStorage.getItem("avtuser")) {
         this.$router.push({ name: "login" });
       }
     },
+    showModal() {
+      console.log(`click modal`);
+    },
   },
   computed: {
     ...mapGetters("user", ["GET_USER"]),
+    ...mapGetters("tags", ["GET_CATEGORY"]),
+    getCategory() {
+      return this.GET_CATEGORY;
+    },
+  },
+  mounted() {
+    this.loadCategoryList();
+    this.loading = false;
   },
 };
 </script>
