@@ -57,7 +57,7 @@
             </router-link>
           </li>
           <li class="nav-item dropdown-submenu">
-            <a href="#" class="nav-link">
+            <a href="/" class="nav-link">
               <i class="fa fa-tags nav-icon"></i>
               <span>Теги</span>
               <i class="right fas fa-angle-left"></i>
@@ -74,11 +74,11 @@
                 </a>
                 <!-- Подкатегории-->
                 <ul class="nav nav-treeview">
-                  <li class="nav-item" v-for="sub in category.subcategory" :key="sub.id">
-                    <a href="#" class="nav-link">
+                  <li class="nav-item" v-for="(title, id) in category.subcategory" :key="id">
+                    <router-link :to="`/tags/${id}`" class="nav-link">
                       <i class="nav-icon far fa-dot-circle"></i>
-                      <span> {{ sub }}</span>
-                    </a>
+                      <span> {{ title }}</span>
+                    </router-link>
                   </li>
                 </ul>
               </li>
