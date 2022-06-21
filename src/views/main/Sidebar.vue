@@ -66,11 +66,21 @@
             <loader v-if="loading" />
             <!-- показываем категории как данные с сервера загрузились-->
             <ul class="nav nav-treeview" v-else>
-              <li class="nav-item">
-                <router-link :to="{ name: 'tags' }" class="nav-link">
+              <li class="nav-item" v-for="category in getCategory" :key="category.id">
+                <a href="#" class="nav-link">
                   <i class="nav-icon far fa-circle"></i>
-                  <span>{{ this.getCategory.title }}</span>
-                </router-link>
+                  <span>{{ category.title }}</span>
+                  <i class="right fas fa-angle-left"></i>
+                </a>
+                <!-- Подкатегории-->
+                <ul class="nav nav-treeview">
+                  <li class="nav-item" v-for="sub in category.subcategory" :key="sub.id">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-dot-circle"></i>
+                      <span> {{ sub }}</span>
+                    </a>
+                  </li>
+                </ul>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link" @click.prevent="showModal">
