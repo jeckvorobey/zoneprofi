@@ -23,6 +23,7 @@ import TableTags from "@/components/Tags/TableTags";
 
 export default {
   name: "index",
+  props: ["id"],
   data: function () {
     return {
       loading: true,
@@ -32,17 +33,25 @@ export default {
     TableTags,
   },
   methods: {
-    ...mapActions("tags", ["loadTags"]),
-    async loadTagsList() {
+    ...mapActions("tags", ["loadTagsSubcategoryId"]),
+    async loadTagsList(id) {
       try {
-        await this.loadTags();
+        await this.loadTagsSubcategoryId(id);
+        this.loading = false;
       } catch (e) {
         console.log(`ERR loadrtags >>> ${e}`);
       }
     },
   },
+  watch: {
+    id: function () {
+      this.loading = true;
+      this.loadTagsList(this.id);
+      this.loading = false;
+    },
+  },
   async mounted() {
-    await this.loadTagsList();
+    await this.loadTagsList(this.$route.params.id);
     this.loading = false;
   },
 };

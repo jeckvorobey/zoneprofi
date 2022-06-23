@@ -19,11 +19,12 @@ export async function loadTags(commit) {
 /**
  *
  * @param { function } commit
+ * @param { String } id
  */
-export async function loadTagsSubcategoryId({ commit }) {
+export async function loadTagsSubcategoryId({ commit }, id) {
   await axios({
     method: "get",
-    url: `https://api.0zo.ru/${process.env.VUE_APP_APIKEY}/tags/tags`,
+    url: `https://api.0zo.ru/${process.env.VUE_APP_APIKEY}/tags/tags/${id}`,
   })
     .then((r) => {
       if (r.data.code === "200") {
@@ -43,7 +44,6 @@ export async function loadCategory({ commit }) {
     body: { id: 1 },
   })
     .then((r) => {
-      console.log(r.data);
       if (r.data.code === "200") {
         commit(SET_CATEGORY, r.data.res);
       }

@@ -3,7 +3,7 @@ import { SET_TAGS, SET_CATEGORY } from "./mutation-types";
 export default {
   /**
    *
-   * @param { Array } state
+   * @param {Array} state
    * @param { Array } tags
    */
   [SET_TAGS](state, tags) {
